@@ -59,13 +59,17 @@ $sql = "SELECT  * FROM `product`";
               $h_id = $conn->insert_id;
 
               foreach($_POST["lists"] as $key => $Id_stock){
-              $sqlStock = "SELECT price FROM product WHERE p_id={$Id_stock}";
+              $sqlStock = "SELECT price,numproduct FROM product WHERE p_id={$Id_stock}";
               $queryStock = $conn->query($sqlStock);
               $stock = $queryStock->fetch_assoc();
 
               $sql_detail = "INSERT INTO `detail_repair` (`dt_id`, `h_id`,`bike_id`,`p_id`, `price`, `num`)
               VALUES (NULL,'".$h_id."','".$_POST['bike_id']."','".$Id_stock."','".$stock['price']."','".$_POST['Pnum'][$Id_stock]."');";
+              $stc = $stock['numproduct'] - $_POST["Pnum"][$Id_stock];
+              $sql9 = "UPDATE product SET numproduct = '$stc' WHERE p_id = $Id_stock";
+               $conn->query($sql9);
               $result_detail = $conn->query($sql_detail);
+
 
               if($result_history == TRUE AND $result_detail == TRUE){
                   echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
