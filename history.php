@@ -109,16 +109,16 @@
                  <th width="25%">รายละเอีรายละเอียดการซ่อม</th>
                  <th width="10%">วันและเวลา</th>
                  <th>ราคารวม</th>
-                 <th>รายละเอียด</th>
+                 <th>พิมพ์</th>
                  <th>แก้ไข</th>
                  <th>ลบ</th>
                </tr>
              </thead>
              <tbody>
              <?php
-                      $search=isset($_GET['search']) ? $_GET['search']:'';
 
-                      $sql = "SELECT * FROM history WHERE h_id LIKE '%$search%'";
+
+                      $sql = "SELECT * FROM history WHERE h_id ";
                       $result = $conn->query($sql);
                       $num = 0;
                       while ($row = $result->fetch_assoc()) {
@@ -131,9 +131,7 @@
                          <td></td>
                          <td></td>
                          <td>
-                           <a href="product_manage/detail.php?id=<?php echo $row['h_id']; ?>" class="btn btn-sm btn-primary  ">
-                             <i class="fas fa-eye"></i> รายละเอียด
-                           </a>
+                           <a href="print.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>
                          </td>
                          <td>
                            <a href="user_manage/edit_user.php?id=<?php echo $row['h_id']; ?>" class="btn btn-sm btn-warning text-white ">
