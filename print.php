@@ -71,41 +71,48 @@
            <center><span>ที่อยู่506 หมู่7 ตำบล.พระบาท อำเภอ.เมือง จังหวัด.ลำปาง</span></center>
            <center><span>เบอร์ติดต่อ 081 564 5762</span></center>
            <br>
+           <?php
+           $id = $_GET['id'];
+           $sql = "SELECT *
+           FROM `history` WHERE h_id = '$id'";
+           $result = $conn->query($sql);
+           $row = $result->fetch_assoc();
+           ?>
+           <span>วันและเวลาที่ซ่อม : </span> <?php echo $row['datetime']; ?>
            <table class="table table-bordered text-center">
 
   <thead class="thead-light">
     <tr>
-      <th>ลำดับ</th>
-      <th>ชื่อสินค้า</th>
-      <th >จำนวน</th>
-      <th >ราคาต่อหน่วย</th>
+      <th width="10%">ลำดับ</th>
+      <th width="50%">ชื่อสินค้า</th>
+      <th width="10%">จำนวน</th>
+      <th width="30%">ราคาต่อหน่วย</th>
     </tr>
   </thead>
   <tbody>
                <?php
-            $sql = "SELECT product.p_id, product.pname, product.price, product.numproduct, product.detail, product.image, dealer.dl_nameshop, dealer.dl_phone, product.dl_insurance
-                    FROM `product`
-                    INNER JOIN dealer
-                    ON dealer.dl_id = product.dl_id
-                    WHERE p_id";
+            $sql = "SELECT * FROM detail_repair AS d1 INNER JOIN product AS d2 ON (d1.p_id = d2.p_id) INNER JOIN history AS d3 ON (d1.h_id = d3.h_id) WHERE d3.h_id = ('".$id."')";
             $result = $conn->query($sql);
             $num = 0;
+            $total = 0;
             while ($row = $result->fetch_assoc()) {
-              $_SESSION['image'] = $row['image'];
               $num++;
+            $total = $total + ($row['price'] * $row['num']);
               ?>
               <tr>
                 <td><?php echo $num; ?></td>
                 <td><?php echo $row['pname']; ?></td>
-                <td><?php echo $row['numproduct']; ?> </td>
+                <td><?php echo $row['num']; ?> </td>
                 <td><?php echo $row['price']; ?> บาท</td>
                 </td>
               </tr>
-            <?php } ?>
     </tbody>
   </table>
-  </form>
+  <p align="right">
+  <?php echo "ราคารวมของสินค้าทั้งหมด : $total"; ?>
 
+  </form>
+  <?php } ?>
   <!-- Script Delete -->
   <script type="text/javascript">
       window.onload = function() { window.print(); }

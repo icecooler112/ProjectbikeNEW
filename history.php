@@ -54,9 +54,7 @@
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             <li>
-                 <a href="show.php"><i class="fas fa-chart-line"></i> รายงาน</a>
-             </li>
+             
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -99,26 +97,23 @@
                    </div>
                </div>
            </nav>
-<center><p><h2>ประวัติการซ่อม</h2></p></center>
+<center><p><h2>รายงานประวัติการซ่อม</h2></p></center>
+
            <table class="table table-bordered text-center DataTable">
 
              <thead class="thead-light">
                <tr>
                  <th width="5%">ลำดับ</th>
                  <th width="20%">ชื่อ-สกุล</th>
-                 <th width="25%">รายละเอีรายละเอียดการซ่อม</th>
-                 <th width="10%">วันและเวลา</th>
-                 <th>ราคารวม</th>
+                 <th width="25%">รายละเอียดการซ่อม</th>
+                 <th width="20%">วันและเวลา</th>
                  <th>พิมพ์</th>
-                 <th>แก้ไข</th>
                  <th>ลบ</th>
                </tr>
              </thead>
              <tbody>
              <?php
-
-
-                      $sql = "SELECT * FROM history WHERE h_id ";
+                      $sql = "SELECT * FROM history AS h1 INNER JOIN user AS h2 ON (h1.user_id = h2.user_id)";
                       $result = $conn->query($sql);
                       $num = 0;
                       while ($row = $result->fetch_assoc()) {
@@ -126,18 +121,13 @@
                         ?>
                        <tr>
                          <td><?php echo $num; ?></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
+                         <td value="<?php echo $row['user_id']; ?>"><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></td>
+                         <td><?php echo $row['h_detail']; ?></td>
+                         <td><?php echo $row['datetime']; ?></td>
                          <td>
-                           <a href="print.php" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>
+                           <a href="print.php?id=<?php echo $row['h_id']; ?>" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>
                          </td>
-                         <td>
-                           <a href="user_manage/edit_user.php?id=<?php echo $row['h_id']; ?>" class="btn btn-sm btn-warning text-white ">
-                             <i class="fas fa-edit"></i> แก้ไข
-                           </a>
-                         </td>
+
                          <td>
                            <?php if ($row['h_id']) { ?>
                              <a href="#" onclick="deleteItem(<?php echo $row['h_id']; ?>);" class="btn btn-sm btn-danger">

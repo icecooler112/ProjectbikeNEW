@@ -82,9 +82,6 @@ $row = $result->fetch_assoc();
              <li>
                  <a href="../dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             <li>
-                 <a href="../show.php"><i class="fas fa-chart-line"></i> รายงาน</a>
-             </li>
          </ul>
        </nav>
        <!-- Page Content  -->

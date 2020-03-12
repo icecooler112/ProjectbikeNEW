@@ -54,9 +54,7 @@
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             <li>
-                 <a href="show.php"><i class="fas fa-chart-line"></i> รายงาน</a>
-             </li>
+            
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -107,8 +105,8 @@
       <th>ลำดับ</th>
       <th  >รูปภาพ</th>
       <th>ชื่อสินค้า</th>
-      <th >ราคาต่อชิ้น</th>
-      <th >จำนวนสินค้า</th>
+      <th >ราคาต่อหน่วย</th>
+      <th >จำนวนอะไหล่คงเหลือ</th>
       <th >รายละเอียด</th>
       <th >แก้ไข</th>
       <th >ลบ</th>
@@ -124,10 +122,12 @@
                     ON dealer.dl_id = product.dl_id
                     WHERE pname LIKE '%$search%'";
             $result = $conn->query($sql);
+
             $num = 0;
             while ($row = $result->fetch_assoc()) {
               $_SESSION['image'] = $row['image'];
               $num++;
+
               ?>
               <tr>
                 <td><?php echo $num; ?></td>
@@ -160,7 +160,6 @@
             <?php } ?>
     </tbody>
   </table>
-
   </form>
   <!-- Script Delete -->
   <script>

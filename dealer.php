@@ -54,9 +54,7 @@
              <li  class="active">
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             <li>
-                 <a href="show.php"><i class="fas fa-chart-line"></i> รายงาน</a>
-             </li>
+             
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -135,7 +133,7 @@
                          <td><?php echo $row['facebook']; ?></td>
                          <td><?php echo $row['line']; ?></td>
                          <td>
-                           <a href="user_manage/edit_user.php?id=<?php echo $row['dl_id']; ?>" class="btn btn-sm btn-warning text-white ">
+                           <a href="manage_dealer/edit_dealer.php?id=<?php echo $row['dl_id']; ?>" class="btn btn-sm btn-warning text-white ">
                              <i class="fas fa-edit"></i> แก้ไข
                            </a>
                          </td>
