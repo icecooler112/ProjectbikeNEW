@@ -35,7 +35,7 @@
 
                 if($result){
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
-                    header('Refresh:1; url=../user.php');
+                    header('Refresh:0; url=../user.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_user.php');

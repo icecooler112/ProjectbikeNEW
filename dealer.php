@@ -54,7 +54,7 @@
              <li  class="active">
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             
+
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -108,9 +108,9 @@
                  <th width="25%">ที่อยู่</th>
                  <th width="10%">เบอร์เบอร์โทรศัพท์</th>
                  <th>Email</th>
-                 <th>Facebook</th>
-                 <th>Line</th>
-                 <th width="8%">แก้ไข</th>
+                 <th width="10%">Facebook</th>
+                 <th width="10%">Line</th>
+                 <th width="13%">แก้ไข</th>
                  <th width="7%">ลบ</th>
                </tr>
              </thead>

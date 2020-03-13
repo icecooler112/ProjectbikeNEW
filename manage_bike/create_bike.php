@@ -46,7 +46,7 @@ $row = $result->fetch_assoc();
                 if ($result) {
 
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
-                  header('Refresh:0; url=../manage_user/bike_show.php');
+                  header('Refresh:0; url=../user.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_bike.php');
@@ -82,7 +82,7 @@ $row = $result->fetch_assoc();
              <li>
                  <a href="../dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             
+
          </ul>
        </nav>
        <!-- Page Content  -->

@@ -36,7 +36,7 @@
 
                 if($result){
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
-                    header('Refresh:1; url=../staff.php');
+                    header('Refresh:0; url=../staff.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_staff.php');
@@ -176,12 +176,12 @@
                                    <label for="staff_duty" class="col-sm-3 col-form-label">ตำแหน่งงาน</label>
                                    <div class="col-sm-9">
                                      <select class="form-control" id="staff_duty" name="staff_duty" required>
-                                       <option selected disabled value="">---ตำแหน่งงาน---</option>
+                                       <option selected disabled hidden value="">---ตำแหน่งงาน---</option>
                                        <option>พนักงานซ่อม</option>
                                        <option>พนักงานขาย</option>
                                      </select>
                                      <div class="invalid-feedback">
-                                         กรุณาเลือกการรัการรับประกันสินค้า
+                                         กรุณาเลือกตำแหน่งงาน
                                      </div>
                                    </div>
                                  </div>

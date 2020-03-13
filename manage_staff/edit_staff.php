@@ -45,10 +45,10 @@ $row = $result->fetch_assoc();
                                 $result = $conn->query($sql);
                     if($result){
                     echo '<script> alert("สำเร็จ! แก้ไขข้อมูลลูกค้าเรียบร้อย!")</script>';
-                    header('Refresh:0; url=../user.php');
+                    header('Refresh:0; url=../staff.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลลูกค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
-                  header('Refresh:1; url=create_user.php');
+                  header('Refresh:1; url=create_staff.php');
 
 
             }
@@ -184,12 +184,16 @@ $row = $result->fetch_assoc();
                                <div class="form-group row">
                                    <label for="staff_duty" class="col-sm-3 col-form-label">ตำแหน่งงาน</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="staff_duty"  name="staff_duty" value="<?php echo $row['staff_duty']; ?>" required>
-                                       <div class="invalid-feedback">
-                                           กรุณากรอกตำแหน่งงาน
-                                       </div>
+                                     <select class="form-control" id="staff_duty" name="staff_duty" required>
+                                       <option selected hidden value="<?php echo $row['staff_duty']; ?>"> <?php echo $row['staff_duty']; ?></option>
+                                       <option>พนักงานซ่อม</option>
+                                       <option>พนักงานขาย</option>
+                                     </select>
+                                     <div class="invalid-feedback">
+                                         กรุณาเลือกตำแหน่งงาน
+                                     </div>
                                    </div>
-                               </div>
+                                 </div>
                               <center><input type="submit" name="submit" class="btn btn-success" value="ยืนยันการทำรายการ">
                                <a class="btn btn-danger" href="../staff.php">ยกเลิก</a></center>
                            </div>

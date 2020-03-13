@@ -8,7 +8,12 @@
     } else {
 ?>
 <?php include('../connect.php'); ?>
-
+<?php
+$id = $_GET['id'];
+$sql = "SELECT * FROM product AS p1 INNER JOIN dealer AS p2 ON p1.p_id = p2.dl_id  WHERE p1.p_id = '" . $id . "' ";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +29,32 @@
 
 </head>
 <body>
+  <?php
+
+        if(isset($_POST['submit'])){
+
+                $sql = "UPDATE `product`
+                        SET `p_id` = '".$_POST['p_id']."',
+                          `pname` = '".$_POST['pname']."',
+                           `price` = '".$_POST['price']."',
+                            `detail` = '".$_POST['detail']."',
+                             `dl_insurance` = '".$_POST['dl_insurance']."',
+                             `num_insurance` = '".$_POST['num_insurance']."',
+                              `dl_id` = '".$_POST['dl_id']."'
+                                WHERE product.`p_id` = '".$_POST['p_id']."';";
+                                $result = $conn->query($sql);
+                    if($result){
+                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลลูกค้าเรียบร้อย!")</script>';
+                    header('Refresh:0; url=../product.php');
+                }else{
+                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลลูกค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
+                  header('Refresh:1; url=edit_product.php');
+
+
+            }
+        }
+    ?>
+
 
   <div class="wrapper">
        <!-- Sidebar  -->
@@ -95,27 +126,126 @@
                    </div>
                </div>
            </nav>
+           <div class="container">
+           <div class="row">
+            <div class="col-md-8 mx-auto mt-5">
+                <div class="card">
+                    <form class="was-validated" action="" method="POST" enctype="multipart/form-data">
+                        <div class="card-header text-center  text-white bg-primary">
+                          <h3>กรอกข้อมูลสินค้า</h3>
+                        </div>
+                        <div class="card-body">
+                          <input type="text" class="form-control" id="p_id" name="p_id" value="<?php echo $row["p_id"]; ?>" hidden>
+                            <div class="form-group row">
+                                <label for="pname" class="col-sm-3 col-form-label">ชื่อสินค้า</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="pname" name="pname" value="<?php echo $row["pname"]; ?>" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกชื่อสินค้า
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="price" class="col-sm-3 col-form-label">ราคา</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="price" onKeyUp="IsNumeric(this.value,this)" name="price" value="<?php echo $row["price"]; ?>" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกราคาสินค้า
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="detail" class="col-sm-3 col-form-label" >Detail</label>
+                                <div class="col-sm-9">
+                                    <textarea type="text" class="form-control" id="detail" name="detail" rows="4" required> <?php echo $row["detail"]; ?></textarea>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกรายละเอียดสินค้า
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="dl_insurance" class="col-sm-3 col-form-label">การรับประกันสินค้า</label>
+                                <div class="col-sm-5">
+                                  <select class="form-control" id="dl_insurance" name="dl_insurance" required>
+                                    <option value="<?php echo $row['dl_insurance']; ?>" hidden selected><?php echo $row["dl_insurance"]; ?></option>
+                                    <option>ไม่มี</option>
+                                    <option>เดือน</option>
+                                    <option>ปี</option>
+                                    <option>ตลอดชีพ</option>
+                                  </select>
+                                  <div class="invalid-feedback">
+                                      กรุณาเลือกการรัการรับประกันสินค้า
+                                  </div>
+                                </div>
+                                <div class="col-sm-4">
+                                  <select class="form-control" id="num_insurance" name="num_insurance" required>
+                                    <option value="<?php echo $row['num_insurance']; ?>" hidden selected><?php echo $row["num_insurance"]; ?></option>
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                  </select>
+                                  <div class="invalid-feedback">
+                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 0)
+                                  </div>
+                                </div>
+                                </div>
+                            <div class="form-group row">
+                                <label for="dl_date" class="col-sm-3 col-form-label">วันที่รับสินค้ามา</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" id="dl_date" value="<?php echo date('Y-m-d');?>" name="dl_date" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาเลือกวันที่รับสินค้ามา (ปี / เดือน / วัน)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="dl_id" class="col-sm-3 col-form-label">เลือกชื่อร้านผู้จำหน่าย</label>
+                                <div class="col-sm-9">
+                                  <select class="form-control" id = "dl_id" name="dl_id" required>
+                                          <option value="<?php echo $row['dl_id']; ?>" selected hidden><?php echo $row["dl_nameshop"]; ?></option>
+                                            <?php $sql = "SELECT * FROM dealer";
+                                            $result = $conn->query($sql);
+                                            while ($row = $result->fetch_assoc()) {
+                                                    ?>
+                                                    <option value="<?php echo $row['dl_id']; ?>"><?php echo $row["dl_nameshop"]; ?></option>
+                                                      <?php } ?>
+                                                      </select>
+                                    <div class="invalid-feedback">
+                                        กรุณาเลือกชื่อร้านผู้จำหน่าย
+                                    </div>
+                                </div>
+                            </div>
+                            <center><input type="submit" name="submit" class="btn btn-success" value="ยืนยันการทำรายการ">
+                            <a class="btn btn-danger" href="../product.php">ยกเลิก</a></center>
+                        </div>
+                        </form>
+                </div>
+            </div>
+           </div>
+           </div>
+           </div>
+           <script>
+            // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
+            function IsNumeric(sText, obj) {
+                var ValidChars = "0123456789,";
+                var IsNumber = true;
+                var Char;
+                for (i = 0; i < sText.length && IsNumber == true; i++) {
+                    Char = sText.charAt(i);
+                    if (ValidChars.indexOf(Char) == -1) {
+                        IsNumber = false;
+                    }
+                }
+                if (IsNumber == false) {
+                    alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
+                    obj.value = sText.substr(0, sText.length - 10);
+                }
+            }
+           </script>
 
-<!-- Edit product -->
-
-<script>
- // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
- function IsNumeric(sText, obj) {
-     var ValidChars = "0123456789";
-     var IsNumber = true;
-     var Char;
-     for (i = 0; i < sText.length && IsNumber == true; i++) {
-         Char = sText.charAt(i);
-         if (ValidChars.indexOf(Char) == -1) {
-             IsNumber = false;
-         }
-     }
-     if (IsNumber == false) {
-         alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
-         obj.value = sText.substr(0, sText.length - 10);
-     }
- }
-</script>
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

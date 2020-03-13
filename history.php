@@ -54,7 +54,7 @@
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             
+
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -113,17 +113,21 @@
              </thead>
              <tbody>
              <?php
-                      $sql = "SELECT * FROM history AS h1 INNER JOIN user AS h2 ON (h1.user_id = h2.user_id)";
+
+                      $sql = "SELECT * FROM history AS h1 INNER JOIN user AS h2 ON h1.user_id = h2.user_id INNER JOIN detail_repair AS h3 ON h1.h_id = h3.h_id INNER JOIN product AS h4 ON h3.p_id = h4.p_id WHERE h3.h_id ";
                       $result = $conn->query($sql);
                       $num = 0;
+
                       while ($row = $result->fetch_assoc()) {
                         $num++;
+
                         ?>
                        <tr>
                          <td><?php echo $num; ?></td>
                          <td value="<?php echo $row['user_id']; ?>"><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></td>
                          <td><?php echo $row['h_detail']; ?></td>
                          <td><?php echo $row['datetime']; ?></td>
+
                          <td>
                            <a href="print.php?id=<?php echo $row['h_id']; ?>" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>
                          </td>
@@ -147,7 +151,7 @@
            <script>
                  function deleteItem(id) {
                    if (confirm('คุณต้องการลบข้อมูลใช่หรือไม่') == true) {
-                     window.location = `user_manage/delete_user.php?id=${id}`;
+                     window.location = `manage_history/delete_history.php?id=${id}`;
                    }
                  };
                </script>

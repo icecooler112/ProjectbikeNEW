@@ -91,7 +91,7 @@
   </thead>
   <tbody>
                <?php
-            $sql = "SELECT * FROM detail_repair AS d1 INNER JOIN product AS d2 ON (d1.p_id = d2.p_id) INNER JOIN history AS d3 ON (d1.h_id = d3.h_id) WHERE d3.h_id = ('".$id."')";
+            $sql = "SELECT * FROM detail_repair AS d1 INNER JOIN product AS d2 ON (d1.p_id = d2.p_id) INNER JOIN history AS d3 ON (d1.h_id = d3.h_id) WHERE d3.h_id ";
             $result = $conn->query($sql);
             $num = 0;
             $total = 0;
@@ -109,11 +109,11 @@
     </tbody>
   </table>
   <p align="right">
-  <?php echo "ราคารวมของสินค้าทั้งหมด : $total"; ?>
+  <?php echo "ราคารวมของสินค้าทั้งหมด : $total บาท"; ?>
 
   </form>
   <?php } ?>
-  <!-- Script Delete -->
+  <!-- Script Print -->
   <script type="text/javascript">
       window.onload = function() { window.print(); }
  </script>
