@@ -146,8 +146,6 @@
                          </td>
                        </tr>
                      <?php } ?>
-
-
              </tbody>
            </table>
 
@@ -156,7 +154,7 @@
            <script>
                  function deleteItem(id) {
                    if (confirm('คุณต้องการลบข้อมูลใช่หรือไม่') == true) {
-                     window.location = `user_manage/delete_user.php?id=${id}`;
+                     window.location = `manage_dealer/delete_dealer.php?id=${id}`;
                    }
                  };
                </script>

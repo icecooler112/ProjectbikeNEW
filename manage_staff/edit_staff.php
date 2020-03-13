@@ -44,10 +44,10 @@ $row = $result->fetch_assoc();
                                 WHERE staff.`staff_id` = '".$_POST['staff_id']."';";
                                 $result = $conn->query($sql);
                     if($result){
-                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลลูกค้าเรียบร้อย!")</script>';
+                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลพนักงานเรียบร้อย!")</script>';
                     header('Refresh:0; url=../staff.php');
                 }else{
-                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลลูกค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
+                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลพนักงานได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:1; url=create_staff.php');
 
 

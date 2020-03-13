@@ -7,11 +7,11 @@ if (isset($id)){
 
 if ($conn->affected_rows){
 
-    echo '<script> alert("สำเร็จ! ลบข้อมูลสินค้าเรียบร้อย")</script>';
+    echo '<script> alert("สำเร็จ! ลบข้อมูลพนักงานเรียบร้อย")</script>';
     header('Refresh:0; url=../staff.php');
 
 }else{
-    echo '<script> alert("ล้มเหลว! ไม่สามารถลบข้อมูลสินค้าได้ กรุกรุกรุณาลองใหม่อีกครั้ง")</script>';
+    echo '<script> alert("ล้มเหลว! ไม่สามารถลบข้อมูลพนักงานได้ กรุณาลองใหม่อีกครั้ง")</script>';
     header('Refresh:0; url=../staff.php');
 }
 

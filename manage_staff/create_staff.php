@@ -35,10 +35,10 @@
 
 
                 if($result){
-                    echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
+                    echo '<script> alert("สำเร็จ! เพิ่มข้อมูลพนักงานเรียบร้อย!")</script>';
                     header('Refresh:0; url=../staff.php');
                 }else{
-                  echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
+                  echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลพนักงานได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_staff.php');
 
 

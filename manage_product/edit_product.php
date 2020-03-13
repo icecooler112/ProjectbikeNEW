@@ -44,10 +44,10 @@ $row = $result->fetch_assoc();
                                 WHERE product.`p_id` = '".$_POST['p_id']."';";
                                 $result = $conn->query($sql);
                     if($result){
-                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลลูกค้าเรียบร้อย!")</script>';
+                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลสินค้าเรียบร้อย!")</script>';
                     header('Refresh:0; url=../product.php');
                 }else{
-                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลลูกค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
+                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:1; url=edit_product.php');
 
 
@@ -132,7 +132,7 @@ $row = $result->fetch_assoc();
                 <div class="card">
                     <form class="was-validated" action="" method="POST" enctype="multipart/form-data">
                         <div class="card-header text-center  text-white bg-primary">
-                          <h3>กรอกข้อมูลสินค้า</h3>
+                          <h3>แก้ไขข้อมูลสินค้า</h3>
                         </div>
                         <div class="card-body">
                           <input type="text" class="form-control" id="p_id" name="p_id" value="<?php echo $row["p_id"]; ?>" hidden>

@@ -8,10 +8,10 @@ if (isset($id)){
         $sql1 = "DELETE FROM detail_repair WHERE `detail_repair`.`h_id` = '".$id."'";
         $results = $conn->query($sql1);
 if ($result == TRUE AND $results == TRUE){
-    echo '<script> alert("สำเร็จ! ลบข้อมูลสินค้าเรียบร้อย")</script>';
+    echo '<script> alert("สำเร็จ! ลบข้อมูลรายละเอียดการซ่อมเรียบร้อย")</script>';
     header('Refresh:0; url=../history.php');
 }else{
-    echo '<script> alert("ล้มเหลว! ไม่สามารถลบข้อมูลสินค้าได้ กรุกรุกรุณาลองใหม่อีกครั้ง")</script>';
+    echo '<script> alert("ล้มเหลว! ไม่สามารถลบข้อมูลรายละเอียดการซ่อมได้ กรุณาลองใหม่อีกครั้ง")</script>';
     header('Refresh:0; url=../history.php');
 }
 

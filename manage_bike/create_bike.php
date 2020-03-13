@@ -45,10 +45,10 @@ $row = $result->fetch_assoc();
 
                 if ($result) {
 
-                    echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
+                    echo '<script> alert("สำเร็จ! เพิ่มข้อมูลรถจักรยานยนต์เรียบร้อย!")</script>';
                   header('Refresh:0; url=../user.php');
                 }else{
-                  echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
+                  echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลรถจักรยานยนต์ได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_bike.php');
 
 
@@ -174,7 +174,7 @@ $row = $result->fetch_assoc();
                                  </div>
                              </div>
 
-                               <center><input type="submit" name="submit" class="btn btn-success" value="ยืนยันการทำรายการ">
+                               <center><input type="submit" name="submit" class="btn btn-success"  value="ยืนยันการทำรายการ">
 
                                 <a class="btn btn-danger text-center" href="../manage_user/bike_show.php?id=<?php echo $row['user_id']; ?>">ย้อนกลับ</a></center>
 

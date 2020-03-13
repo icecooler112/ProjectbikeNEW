@@ -45,10 +45,10 @@ $row = $result->fetch_assoc();
                                 WHERE dealer.`dl_id` = '".$_POST['dl_id']."';";
                                 $result = $conn->query($sql);
                     if($result){
-                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลลูกค้าเรียบร้อย!")</script>';
+                    echo '<script> alert("สำเร็จ! แก้ไขข้อมูลผู้จำหน่ายสินค้าเรียบร้อย!")</script>';
                     header('Refresh:0; url=../dealer.php');
                 }else{
-                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลลูกค้าได้ กรุกรุณาลองใหม่อีกครั้ง")</script>';
+                  echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลผู้จำหน่ายสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:1; url=edit_dealer.php');
 
 
