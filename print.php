@@ -79,6 +79,8 @@
            $row = $result->fetch_assoc();
            ?>
            <span>วันและเวลาที่ซ่อม : </span> <?php echo $row['datetime']; ?>
+           <br>
+            รายละเอียดการซ่อม : <?php echo $row['h_detail']; ?>
            <table class="table table-bordered text-center">
 
   <thead class="thead-light">
@@ -91,7 +93,7 @@
   </thead>
   <tbody>
                <?php
-            $sql = "SELECT * FROM detail_repair AS d1 INNER JOIN product AS d2 ON (d1.p_id = d2.p_id) INNER JOIN history AS d3 ON (d1.h_id = d3.h_id) WHERE d3.h_id ";
+            $sql = "SELECT * FROM detail_repair AS d1 INNER JOIN product AS d2 ON (d1.p_id = d2.p_id) INNER JOIN history AS d3 ON (d1.h_id = d3.h_id) WHERE d3.h_id ='" . $_GET['id'] . "'";
             $result = $conn->query($sql);
             $num = 0;
             $total = 0;
@@ -108,7 +110,9 @@
               </tr>
     </tbody>
   </table>
+
   <p align="right">
+
   <?php echo "ราคารวมของสินค้าทั้งหมด : $total บาท"; ?>
 
   </form>

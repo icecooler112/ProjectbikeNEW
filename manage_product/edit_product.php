@@ -10,7 +10,7 @@
 <?php include('../connect.php'); ?>
 <?php
 $id = $_GET['id'];
-$sql = "SELECT * FROM product AS p1 INNER JOIN dealer AS p2 ON p1.p_id = p2.dl_id  WHERE p1.p_id = '" . $id . "' ";
+$sql = "SELECT * FROM `product`  WHERE p_id = '" . $id . "' ";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
@@ -37,10 +37,11 @@ $row = $result->fetch_assoc();
                         SET `p_id` = '".$_POST['p_id']."',
                           `pname` = '".$_POST['pname']."',
                            `price` = '".$_POST['price']."',
+                           `numproduct` = '".$_POST['numproduct']."',
                             `detail` = '".$_POST['detail']."',
                              `dl_insurance` = '".$_POST['dl_insurance']."',
-                             `num_insurance` = '".$_POST['num_insurance']."',
-                              `dl_id` = '".$_POST['dl_id']."'
+                             `num_insurance` = '".$_POST['num_insurance']."'
+
                                 WHERE product.`p_id` = '".$_POST['p_id']."';";
                                 $result = $conn->query($sql);
                     if($result){
@@ -48,7 +49,7 @@ $row = $result->fetch_assoc();
                     header('Refresh:0; url=../product.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถแก้ไขข้อมูลสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
-                  header('Refresh:1; url=edit_product.php');
+                  header('Refresh:0; url=edit_product.php');
 
 
             }
@@ -155,6 +156,15 @@ $row = $result->fetch_assoc();
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="price" class="col-sm-3 col-form-label">จำนวนสินค้า</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="numproduct" onKeyUp="IsNumeric(this.value,this)" name="numproduct" value="<?php echo $row["numproduct"]; ?>" required>
+                                    <div class="invalid-feedback">
+                                        กรุณากรอกจำนวนสินค้า
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="detail" class="col-sm-3 col-form-label" >Detail</label>
                                 <div class="col-sm-9">
                                     <textarea type="text" class="form-control" id="detail" name="detail" rows="4" required> <?php echo $row["detail"]; ?></textarea>
@@ -192,16 +202,7 @@ $row = $result->fetch_assoc();
                                   </div>
                                 </div>
                                 </div>
-                            <div class="form-group row">
-                                <label for="dl_date" class="col-sm-3 col-form-label">วันที่รับสินค้ามา</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="dl_date" value="<?php echo date('Y-m-d');?>" name="dl_date" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกวันที่รับสินค้ามา (ปี / เดือน / วัน)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <label for="dl_id" class="col-sm-3 col-form-label">เลือกชื่อร้านผู้จำหน่าย</label>
                                 <div class="col-sm-9">
                                   <select class="form-control" id = "dl_id" name="dl_id" required>
@@ -217,7 +218,7 @@ $row = $result->fetch_assoc();
                                         กรุณาเลือกชื่อร้านผู้จำหน่าย
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <center><input type="submit" name="submit" class="btn btn-success" value="ยืนยันการทำรายการ">
                             <a class="btn btn-danger" href="../product.php">ยกเลิก</a></center>
                         </div>

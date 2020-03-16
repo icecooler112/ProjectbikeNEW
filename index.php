@@ -253,8 +253,8 @@ $sql = "SELECT  * FROM `product`";
                                                             <td><?php echo $num; ?></td>
                                                             <td><?php echo $row['pname']; ?></td>
                                                             <td><?php echo $row['price']; ?> บาท</td>
-                                                            <td><?php echo $row['numproduct']; ?></td>
-                                                            <td><input type="text" class="form-control" id="product-num" name="Pnum[<?=$row["p_id"]?>]" value="1"></td>
+                                                            <td class="tr-stocknum"><input type="text " class="form-control stocknum" value="<?php echo $row['numproduct']; ?>" disabled></td>
+                                                            <td><input type="number" class="form-control js-stocknum" id="product-num" name="Pnum[<?=$row["p_id"]?>]" value="1"></td>
                                                             <td>
                                                                 <div class="custom-control custom-checkbox">
                                                                     <input type="checkbox" class="custom-control-input" id="customControlValidation<?= $num ?>" name="lists[]" value="<?= $row['p_id'] ?>" >
@@ -268,13 +268,12 @@ $sql = "SELECT  * FROM `product`";
                                              <br>
                                             <center><button class="btn btn-success" type="submit" name="submit" id="submit"><i class="fas fa-check-circle"></i></input> ยืนยันการทำรายการ </button></center>
                                             </form>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-  </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -311,6 +310,18 @@ $sql = "SELECT  * FROM `product`";
 
         });
     </script>
+    <script>
+      $(".js-stocknum").change(function() {
+          var tr = $(this).closest("tr");
+          var stocknum = parseInt(tr.find(".stocknum").val());
+          var input = parseInt($(this).val());
+
+          if (input > stocknum) {
+              alert("กรุณากรอกจำนวนสินค้าที่ไม่เกินจำนวนสินค้าที่มีในคลัง");
+              $(this).val(1);
+          }
+      });
+  </script>
 </body>
 </html>
 <?php } ?>

@@ -39,9 +39,24 @@ $row = $result->fetch_assoc();
          */
         if(isset($_POST['submit'])){
 
+          $bike_id = $_POST["bike_id"];
+          $check = "SELECT * FROM bike_user  WHERE  bike_id = '$bike_id'";
+	         $result = $conn->query($check) or die(mysql_error());
+
+              if($result->num_rows > 0)
+              {
+               echo "<script>";
+  			          echo "alert('ข้อมูลซ้ำ !!!');";
+  			             echo "window.location='../user.php';";
+            	 echo "</script>";
+
+              }else{
+
                 $sql = "INSERT INTO `bike_user` (`bu_id`,`user_id`,`bike_id`, `color`, `year_bike`, `brand`)
                         VALUES (NULL,'".$_POST['user_id']."','".$_POST['bike_id']."','".$_POST['color']."','".$_POST['year_bike']."','".$_POST['brand']."');";
-                $result = $conn->query($sql);
+                        $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
+                      }
+                      mysqli_close($conn);
 
                 if ($result) {
 

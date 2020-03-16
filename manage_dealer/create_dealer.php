@@ -23,15 +23,30 @@
 </head>
 <body>
   <?php
-        require_once('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
+        include('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
         /**
          * ตรวจสอบเงื่อนไขที่ว่า ตัวแปร $_POST['submit'] ได้ถูกกำหนดขึ้นมาหรือไม่
          */
         if(isset($_POST['submit'])){
+          $dl_nameshop = $_POST["dl_nameshop"];
+          $check = "SELECT * FROM dealer  WHERE  dl_nameshop = '$dl_nameshop'";
+	         $result = $conn->query($check) or die(mysql_error());
+
+              if($result->num_rows > 0)
+              {
+               echo "<script>";
+  			          echo "alert('ข้อมูลซ้ำ !!!');";
+  			             echo "window.location='create_dealer.php';";
+            	 echo "</script>";
+
+              }else{
 
                 $sql = "INSERT INTO `dealer` (`dl_id`, `dl_nameshop`, `dl_address`, `dl_email`, `dl_phone`, `facebook`, `line`)
                         VALUES (NULL,'".$_POST['dl_nameshop']."','".$_POST['dl_address']."','".$_POST['dl_email']."','".$_POST['dl_phone']."','".$_POST['facebook']."','".$_POST['line']."');";
-                $result = $conn->query($sql);
+                        $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
+                      }
+                      mysqli_close($conn);
+
 
                 if($result){
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลผู้จำหน่ายสินค้าเรียบร้อย!")</script>';
@@ -39,8 +54,6 @@
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลผู้จำหน่ายสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_dealer.php');
-
-
             }
         }
     ?>

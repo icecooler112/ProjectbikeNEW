@@ -31,7 +31,7 @@
 
                 $sql = "INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `idcard`, `user_address`, `phone`, `email`, `user_facebook`, `user_line`)
                         VALUES (NULL,'".$_POST['first_name']."','".$_POST['last_name']."','".$_POST['idcard']."','".$_POST['user_address']."','".$_POST['phone']."','".$_POST['email']."','".$_POST['user_facebook']."','".$_POST['user_line']."');";
-                $result = $conn->query($sql);
+                        $result = $conn->query($sql);
 
                 if($result){
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลลูกค้าเรียบร้อย!")</script>';

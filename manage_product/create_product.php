@@ -24,10 +24,24 @@
 <body>
   <?php
         include('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
+
         /**
          * ตรวจสอบเงื่อนไขที่ว่า ตัวแปร $_POST['submit'] ได้ถูกกำหนดขึ้นมาหรือไม่
          */
         if(isset($_POST['submit'])){
+          $pname = $_POST["pname"];
+          $check = "SELECT * FROM product  WHERE  pname = '$pname'";
+	         $result = $conn->query($check) or die(mysql_error());
+
+              if($result->num_rows > 0)
+              {
+               echo "<script>";
+  			          echo "alert('ข้อมูลซ้ำ !!!');";
+  			             echo "window.location='create_product.php';";
+            	 echo "</script>";
+
+              }else{
+
             $temp = explode('.',$_FILES['image']['name']);
             $new_name = round(microtime(true)) . '.' . end($temp);
             /**
@@ -35,27 +49,27 @@
              */
             if(move_uploaded_file($_FILES['image']['tmp_name'], '../upload/' .$new_name)){
 
-
-                $sql = "INSERT INTO `product` (`p_id`, `pname`,`price`, `numproduct`, `detail`, `image`, `dl_id`, `dl_insurance`, `num_insurance`,`dl_date`)
-                        VALUES (NULL, '".$_POST['pname']."',
+                $sql = "INSERT INTO `product` (`p_id`, `pname`,`price`, `numproduct`, `detail`, `image`, `dl_id`, `dl_insurance`, `num_insurance`)
+                        VALUES (NULL, '".$pname."',
                             '".$_POST['price']."',
                              '".$_POST['numproduct']."',
                               '".$_POST['detail']."' ,
                                '". $new_name."',
                                '".$_POST['dl_id']."' ,
                                '".$_POST['dl_insurance']."',
-                               '".$_POST['num_insurance']."',
-                               '".$_POST['dl_date']."');";
-                $result = $conn->query($sql);
+                               '".$_POST['num_insurance']."');";
+                $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
+              }
+              mysqli_close($conn);
+            
                 if($result){
-                    echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย!")</script>';
-                    header('Refresh:1; url=../product.php');
+                    echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย")</script>';
+                    header('Refresh:0; url=../product.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_product.php');
 
                 }
-            }
         }
     ?>
   <div class="wrapper">
@@ -203,15 +217,6 @@
                                   </div>
                                 </div>
                                 </div>
-                            <div class="form-group row">
-                                <label for="dl_date" class="col-sm-3 col-form-label">วันที่รับสินค้ามา</label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" id="dl_date" value="<?php echo date('Y-m-d');?>" name="dl_date" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาเลือกวันที่รับสินค้ามา (ปี / เดือน / วัน)
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group row">
                                 <label for="image" class="col-sm-3 col-form-label">อัพโหลดรูปภาพ</label>
                                 <div class="col-sm-9">
