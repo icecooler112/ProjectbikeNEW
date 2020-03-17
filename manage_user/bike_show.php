@@ -107,7 +107,7 @@ FROM `user` WHERE user_id = '$id'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
-<a href="../manage_bike/create_bike.php?id=<?php echo $row['user_id']; ?>" class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูข้อมูลรถจักรยานยนต์ </a>
+<a href="../manage_bike/create_bike.php?id=<?php echo $row['user_id']; ?> " class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูข้อมูลรถจักรยานยนต์ </a>
 
            <table class="table table-bordered text-center DataTable">
 
@@ -143,13 +143,13 @@ $row = $result->fetch_assoc();
                          <td><?php echo $row['year_bike']; ?></td>
                          <td><?php echo $row['brand']; ?></td>
                          <td>
-                           <a href="../manage_bike/edit_bike.php?id=<?php echo $row['user_id']; ?>" class="btn btn-sm btn-warning text-white ">
+                           <a href="../manage_bike/edit_bike.php?id=<?php echo $row['user_id']; ?> , <?php echo $row['bu_id']; ?>" class="btn btn-sm btn-warning text-white ">
                              <i class="fas fa-edit"></i> แก้ไข
                            </a>
                          </td>
                          <td>
                            <?php if ($row['bu_id']) { ?>
-                             <a href="#" onclick="deleteItem(<?php echo $row['bu_id']; ?>);" class="btn btn-sm btn-danger">
+                             <a href="#" onclick="deleteItem(<?php echo $row['bu_id']; ?> , <?php echo $row['user_id']; ?>);" class="btn btn-sm btn-danger">
                                <i class="fas fa-trash-alt"></i> ลบ
                              </a>
                            <?php } ?>
@@ -164,9 +164,9 @@ $row = $result->fetch_assoc();
 
            <!-- Script Delete -->
            <script>
-                 function deleteItem(id) {
+                 function deleteItem(id, user) {
                    if (confirm('คุณต้องการลบข้อมูลใช่หรือไม่') == true) {
-                     window.location = `../manage_bike/delete_bike.php?id=${id}`;
+                     window.location = `../manage_bike/delete_bike.php?id=${id}&user=${user}`;
                    }
                  };
                </script>

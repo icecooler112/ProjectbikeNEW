@@ -34,6 +34,27 @@ $row = $result->fetch_assoc();
 
         if(isset($_POST['submit'])){
 
+          #SELECT OLD Data
+          $sqlData = "SELECT * FROM bike_user WHERE bu_id={$_POST['bu_id']}";
+          $queryData = $conn->query($sqlData);
+          $data = $queryData->fetch_assoc();
+
+          #SELECT CHECK Data
+          $sqlCheck = "SELECT * FROM bike_user WHERE bike_id='{$_POST["bike_id"]}'";
+          $queryCheck = $conn->query($sqlCheck);
+          $check = $queryCheck->num_rows;
+
+            $has = true;
+            if( $data["bike_id"] == $_POST["bike_id"] ){
+              $has = false;
+            }
+
+              if( !empty($check) && $has ){
+              echo '<script> alert("ตรวจสอบพบข้อมูลซ้ำในระบบ !")</script>';
+              header('Refresh:0;');
+              exit;
+            }
+
                 $sql = "UPDATE `bike_user`
                         SET `bu_id` = '".$_POST['bu_id']."',
                           `user_id` = '".$_POST['user_id']."',

@@ -46,7 +46,7 @@ $row = $result->fetch_assoc();
               if($result->num_rows > 0)
               {
                echo "<script>";
-  			          echo "alert('ข้อมูลซ้ำ !!!');";
+  			          echo "alert('มีเลขทะเบียนรถคันนี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง !!!');";
   			             echo "window.location='../user.php';";
             	 echo "</script>";
 
@@ -61,7 +61,7 @@ $row = $result->fetch_assoc();
                 if ($result) {
 
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลรถจักรยานยนต์เรียบร้อย!")</script>';
-                  header('Refresh:0; url=../user.php');
+                  header('Refresh:0; url=../manage_user/bike_show.php?id='.$_GET['user_id']);
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลรถจักรยานยนต์ได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_bike.php');

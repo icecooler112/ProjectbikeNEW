@@ -252,7 +252,7 @@ $sql = "SELECT  * FROM `product`";
                                                         <tr>
                                                             <td><?php echo $num; ?></td>
                                                             <td><?php echo $row['pname']; ?></td>
-                                                            <td><?php echo $row['price']; ?> บาท</td>
+                                                            <td><?php echo number_format($row['price']); ?> บาท</td>
                                                             <td class="tr-stocknum"><input type="text " class="form-control stocknum" value="<?php echo $row['numproduct']; ?>" disabled></td>
                                                             <td><input type="number" class="form-control js-stocknum" id="product-num" name="Pnum[<?=$row["p_id"]?>]" value="1"></td>
                                                             <td>

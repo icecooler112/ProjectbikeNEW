@@ -10,7 +10,7 @@
 <?php include('../connect.php'); ?>
 <?php
 $id = $_GET['id'];
-$sql = "SELECT * FROM `product`  WHERE p_id = '" . $id . "' ";
+$sql = "SELECT * FROM product INNER JOIN dealer ON product.dl_id = dealer.dl_id  WHERE product.p_id = '" . $id . "' ";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
@@ -32,6 +32,27 @@ $row = $result->fetch_assoc();
   <?php
 
         if(isset($_POST['submit'])){
+
+          #SELECT OLD Data
+          $sqlData = "SELECT * FROM product WHERE p_id={$_POST['p_id']}";
+          $queryData = $conn->query($sqlData);
+          $data = $queryData->fetch_assoc();
+
+          #SELECT CHECK Data
+          $sqlCheck = "SELECT * FROM product WHERE pname='{$_POST["pname"]}'";
+          $queryCheck = $conn->query($sqlCheck);
+          $check = $queryCheck->num_rows;
+
+            $has = true;
+            if( $data["pname"] == $_POST["pname"] ){
+              $has = false;
+            }
+
+              if( !empty($check) && $has ){
+              echo '<script> alert("ตรวจสอบพบข้อมูลซ้ำในระบบ !")</script>';
+              header('Refresh:0;');
+              exit;
+            }
 
                 $sql = "UPDATE `product`
                         SET `p_id` = '".$_POST['p_id']."',
@@ -202,7 +223,7 @@ $row = $result->fetch_assoc();
                                   </div>
                                 </div>
                                 </div>
-                            <!-- <div class="form-group row">
+                            <div class="form-group row">
                                 <label for="dl_id" class="col-sm-3 col-form-label">เลือกชื่อร้านผู้จำหน่าย</label>
                                 <div class="col-sm-9">
                                   <select class="form-control" id = "dl_id" name="dl_id" required>
@@ -218,7 +239,7 @@ $row = $result->fetch_assoc();
                                         กรุณาเลือกชื่อร้านผู้จำหน่าย
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                             <center><input type="submit" name="submit" class="btn btn-success" value="ยืนยันการทำรายการ">
                             <a class="btn btn-danger" href="../product.php">ยกเลิก</a></center>
                         </div>

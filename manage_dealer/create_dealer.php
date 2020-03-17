@@ -35,7 +35,7 @@
               if($result->num_rows > 0)
               {
                echo "<script>";
-  			          echo "alert('ข้อมูลซ้ำ !!!');";
+  			          echo "alert('มีชื่อร้านค้าผู้ข้อมูลผู้จำหน่ายนี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง !!!');";
   			             echo "window.location='create_dealer.php';";
             	 echo "</script>";
 

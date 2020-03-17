@@ -8,7 +8,7 @@ if (isset($id)){
 if ($conn->affected_rows){
 
     echo '<script> alert("สำเร็จ! ลบข้อมูลรถจักรยายนต์เรียบร้อย")</script>';
-    header('Refresh:0; url=../user.php');
+    header('Refresh:0; url=../manage_user/bike_show.php?id='.$_GET['user']);
 
 }else{
     echo '<script> alert("ล้มเหลว! ไม่สามารถลบข้อมูลรถจักรยานยนต์ได้ กรุณาลองใหม่อีกครั้ง")</script>';

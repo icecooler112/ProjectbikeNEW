@@ -36,7 +36,7 @@
               if($result->num_rows > 0)
               {
                echo "<script>";
-  			          echo "alert('ข้อมูลซ้ำ !!!');";
+  			          echo "alert('มีชื่อสินค้านี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
   			             echo "window.location='create_product.php';";
             	 echo "</script>";
 
@@ -61,7 +61,7 @@
                 $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
               }
               mysqli_close($conn);
-            
+
                 if($result){
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลสินค้าเรียบร้อย")</script>';
                     header('Refresh:0; url=../product.php');
@@ -69,7 +69,8 @@
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_product.php');
 
-                }
+            }
+          }
         }
     ?>
   <div class="wrapper">
@@ -134,9 +135,7 @@
                                  </div>
                                </div>
 
-                             <?php }else header('location:../login.php'); { ?>
-
-                  <?php } ?>
+                             <?php }else{ header('location:../login.php'); } ?>
                            </li>
                        </ul>
                    </div>

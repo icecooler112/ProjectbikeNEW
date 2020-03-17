@@ -136,7 +136,7 @@
                 <?php } ?>
                 </td>
                 <td><?php echo $row['pname']; ?></td>
-                <td><?php echo $row['price']; ?> บาท</td>
+                <td><?php echo number_format($row['price']); ?> บาท</td>
                 <td><?php echo $row['numproduct']; ?></td>
                 <td>
                   <a href="manage_product/edit_product.php?id=<?php echo $row['p_id']; ?>" class="btn btn-sm btn-warning text-white ">
