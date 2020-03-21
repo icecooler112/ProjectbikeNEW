@@ -77,6 +77,11 @@
            FROM `history` WHERE h_id = '$id'";
            $result = $conn->query($sql);
            $row = $result->fetch_assoc();
+           if (empty($row)) {
+             echo '<script> alert("ไม่พบข้อมูล !") </script>';
+             echo '<script> window.location = "history.php"</script>';
+           }
+
            ?>
            <span>วันและเวลาที่ซ่อม : </span> <?php echo $row['datetime']; ?>
            <br>

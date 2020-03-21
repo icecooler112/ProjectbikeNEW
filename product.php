@@ -103,9 +103,9 @@
   <thead class="thead-light">
     <tr>
       <th>ลำดับ</th>
-      <th>รูปภาพ</th>
       <th width="30%">ชื่อสินค้า</th>
       <th width="10%">ราคาต่อหน่วย</th>
+            <th width="25%">รายละเอียดสิินค้า</th>
       <th width="10%">จำนวนอะไหล่คงเหลือ</th>
       <th >แก้ไข</th>
       <th >ลบ</th>
@@ -115,7 +115,7 @@
                <?php
             $search=isset($_GET['search']) ? $_GET['search']:'';
 
-            $sql = "SELECT product.p_id, product.pname, product.price, product.numproduct, product.detail, product.image, dealer.dl_nameshop, dealer.dl_phone, product.dl_insurance
+            $sql = "SELECT product.p_id, product.pname, product.price, product.numproduct, product.detail, dealer.dl_nameshop, dealer.dl_phone, product.dl_insurance
                     FROM `product`
                     INNER JOIN dealer
                     ON dealer.dl_id = product.dl_id
@@ -124,19 +124,16 @@
 
             $num = 0;
             while ($row = $result->fetch_assoc()) {
-              $_SESSION['image'] = $row['image'];
+
               $num++;
 
               ?>
               <tr>
                 <td><?php echo $num; ?></td>
-                <td>
-                <?php if(isset($_SESSION['id'])) { ?>
-                <img src="upload/<?php echo $_SESSION['image'];?>" class="figure-img img-fluid rounded" width="130" height="130" alt="">
-                <?php } ?>
-                </td>
+
                 <td><?php echo $row['pname']; ?></td>
                 <td><?php echo number_format($row['price']); ?> บาท</td>
+                <td><?php echo $row['detail']; ?></td>
                 <td><?php echo $row['numproduct']; ?></td>
                 <td>
                   <a href="manage_product/edit_product.php?id=<?php echo $row['p_id']; ?>" class="btn btn-sm btn-warning text-white ">

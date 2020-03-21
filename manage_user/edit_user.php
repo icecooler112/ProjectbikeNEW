@@ -13,6 +13,10 @@ $id = $_GET['id'];
 $sql = "SELECT  `user_id`, `first_name`,`last_name`, `idcard`, `user_address`,`phone`,`email`,`user_facebook`,`user_line` FROM `user`  WHERE user_id = '" . $id . "' ";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+if (empty($row)) {
+  echo '<script> alert("ไม่พบข้อมูล !") </script>';
+  echo '<script> window.location = "../user.php"</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -140,7 +144,7 @@ $row = $result->fetch_assoc();
                                <div class="form-group row">
                                    <label for="first_name" class="col-sm-3 col-form-label">ชื่อ</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $row['first_name']; ?>" required>
+                                       <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $row['first_name']; ?>" pattern="[A-Za-zก-๙]{1,}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกชื่อลูกค้า
                                        </div>
@@ -149,7 +153,7 @@ $row = $result->fetch_assoc();
                                <div class="form-group row">
                                    <label for="last_name" class="col-sm-3 col-form-label">นามสกุล</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $row['last_name']; ?>" required>
+                                       <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $row['last_name']; ?>" pattern="[A-Za-zก-๙]{1,}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกนามสกุลลูกค้า
                                        </div>
@@ -158,7 +162,7 @@ $row = $result->fetch_assoc();
                                <div class="form-group row">
                                    <label for="idcard" class="col-sm-3 col-form-label">รหัสบัตรปรจำตัวประชาชน</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="idcard" onKeyUp="IsNumeric(this.value,this)" name="idcard" value="<?php echo $row['idcard']; ?>" required>
+                                       <input type="text" class="form-control" id="idcard" onKeyUp="IsNumeric(this.value,this)" name="idcard" value="<?php echo $row['idcard']; ?>" pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 ตัวเท่านั้น" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกรหัสบัรหัสบัตรประจำตัวประชาชน 13 หลัก
                                        </div>
@@ -176,7 +180,7 @@ $row = $result->fetch_assoc();
                                <div class="form-group row">
                                    <label for="phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="phone" onKeyUp="IsNumeric(this.value,this)"  name="phone" value="<?php echo $row['phone']; ?>" required>
+                                       <input type="text" class="form-control" id="phone" onKeyUp="IsNumeric(this.value,this)"  name="phone" value="<?php echo $row['phone']; ?>" pattern="[0-9]{10}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>
@@ -185,7 +189,7 @@ $row = $result->fetch_assoc();
                                <div class="form-group row">
                                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" id="email" name="email" value="<?php echo $row['email']; ?>" required>
+                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php echo $row['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกอีเมลล์ ตามรูปแบบที่กำหนด (@hotmail.com / @gmail.com)
                                        </div>

@@ -110,7 +110,7 @@ $sql = "SELECT  * FROM `product`";
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-
+             
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -195,7 +195,7 @@ $sql = "SELECT  * FROM `product`";
                                     <div class="form-group row">
                                         <label for="datetime" class="col-sm-3 col-form-label">วันที่เข้ารับการซ่อม</label>
                                         <div class="col-sm-9">
-                                            <input type="datetime" class="form-control" id="datetime" value="<?php date_default_timezone_set('asia/bangkok'); echo date('Y-m-d H:i:s');?>" name="datetime" required>
+                                            <input type="datetime" class="form-control" id="datetime"  value="<?php date_default_timezone_set('asia/bangkok'); echo date('Y-m-d H:i:s');?>" name="datetime" required>
                                             <div class="invalid-feedback">
                                                 กรุณาเลือกวันที่เข้ารับการซ่อม
                                             </div>
@@ -257,7 +257,7 @@ $sql = "SELECT  * FROM `product`";
                                                             <td><input type="number" class="form-control js-stocknum" id="product-num" name="Pnum[<?=$row["p_id"]?>]" value="1"></td>
                                                             <td>
                                                                 <div class="custom-control custom-checkbox">
-                                                                    <input type="checkbox" class="custom-control-input" id="customControlValidation<?= $num ?>" name="lists[]" value="<?= $row['p_id'] ?>" >
+                                                                    <input type="checkbox" class="custom-control-input"  id="customControlValidation<?= $num ?>" name="lists[]" value="<?= $row['p_id'] ?>" >
                                                                     <label class="custom-control-label" for="customControlValidation<?= $num ?>"> เลือก</label>
                                                                 </div>
                                                             <?php } ?>
@@ -322,6 +322,7 @@ $sql = "SELECT  * FROM `product`";
           }
       });
   </script>
+
 </body>
 </html>
 <?php } ?>

@@ -44,9 +44,8 @@
                 $_SESSION['Last_Name'] = $row['Last_Name'];
                 header('location:index.php');
             }else{
-              echo '<div class="alert alert-warning alert-dismissible fade show test-center" role="alert">
-                    <strong>WARNING!</strong> Username หรือ Password ของคุณไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง.
-                  </div>';
+              echo '<script> alert("แจ้งเตือน! Username หรือ Password ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")</script>';
+              header('Refresh:0;');
             }
         }
     ?>

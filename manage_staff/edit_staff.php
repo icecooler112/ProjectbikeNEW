@@ -13,6 +13,10 @@ $id = $_GET['id'];
 $sql = "SELECT  `staff_id`, `staff_fname`,`staff_lname`, `staff_address`, `staff_email`,`staff_phone`,`staff_duty` FROM `staff`  WHERE staff_id = '" . $id . "' ";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+if (empty($row)) {
+  echo '<script> alert("ไม่พบข้อมูล !") </script>';
+  echo '<script> window.location = "../staff.php"</script>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -15,6 +15,12 @@ $sql = "SELECT user_id
 FROM `user` WHERE user_id = '$id'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+  if (empty($row)) {
+    echo '<script> alert("ไม่พบข้อมูล !") </script>';
+    echo '<script> window.location = "../user.php"</script>';
+  }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +67,7 @@ $row = $result->fetch_assoc();
                 if ($result) {
 
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลรถจักรยานยนต์เรียบร้อย!")</script>';
-                  header('Refresh:0; url=../manage_user/bike_show.php?id='.$_GET['user_id']);
+                  header('Refresh:0; url=../manage_user/bike_show.php?id='.$_POST['user_id']);
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลรถจักรยานยนต์ได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_bike.php');
@@ -155,7 +161,7 @@ $row = $result->fetch_assoc();
                              <div class="form-group row">
                                  <label for="bike_id" class="col-sm-3 col-form-label">เลขทะเบียนรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" id="bike_id" name="bike_id" required>
+                                     <input type="text" class="form-control" id="bike_id" name="bike_id" pattern="[ก-ฮ0-9]{3,10}" required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกเลขทะเบียนรถ
                                      </div>
@@ -164,7 +170,7 @@ $row = $result->fetch_assoc();
                              <div class="form-group row">
                                  <label for="color" class="col-sm-3 col-form-label">สีรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" id="color" name="color"  required>
+                                     <input type="text" class="form-control" id="color" name="color" pattern="[ก-๙A-Za-z]{1,}" required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกสีรถ
                                      </div>
@@ -173,7 +179,7 @@ $row = $result->fetch_assoc();
                              <div class="form-group row">
                                  <label for="year_bike" class="col-sm-3 col-form-label">ปีของรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" id="year_bike" onKeyUp="IsNumeric(this.value,this)" name="year_bike"  required>
+                                     <input type="text" class="form-control" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike" onKeyUp="IsNumeric(this.value,this)" name="year_bike"  required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกปีของรถ
                                      </div>
@@ -182,7 +188,7 @@ $row = $result->fetch_assoc();
                              <div class="form-group row">
                                  <label for="brand" class="col-sm-3 col-form-label">ยี่ห้อของรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" id="brand" name="brand"  required>
+                                     <input type="text" class="form-control" id="brand" name="brand" pattern="[A-Za-zก-๙]{1,}"  required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกยี่ห้อของรถ
                                      </div>

@@ -42,19 +42,11 @@
 
               }else{
 
-            $temp = explode('.',$_FILES['image']['name']);
-            $new_name = round(microtime(true)) . '.' . end($temp);
-            /**
-             * ตรวจสอบเงื่อนไขที่ว่า สามารถย้ายไฟล์รูปภาพเข้าสู่ storage ของเราได้หรือไม่
-             */
-            if(move_uploaded_file($_FILES['image']['tmp_name'], '../upload/' .$new_name)){
-
-                $sql = "INSERT INTO `product` (`p_id`, `pname`,`price`, `numproduct`, `detail`, `image`, `dl_id`, `dl_insurance`, `num_insurance`)
+                $sql = "INSERT INTO `product` (`p_id`, `pname`,`price`, `numproduct`, `detail`, `dl_id`, `dl_insurance`, `num_insurance`)
                         VALUES (NULL, '".$pname."',
                             '".$_POST['price']."',
                              '".$_POST['numproduct']."',
                               '".$_POST['detail']."' ,
-                               '". $new_name."',
                                '".$_POST['dl_id']."' ,
                                '".$_POST['dl_insurance']."',
                                '".$_POST['num_insurance']."');";
@@ -217,15 +209,6 @@
                                 </div>
                                 </div>
                             <div class="form-group row">
-                                <label for="image" class="col-sm-3 col-form-label">อัพโหลดรูปภาพ</label>
-                                <div class="col-sm-9">
-                                    <input type="file" class="form-control" id="image" name="image" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาใส่รูปภาพที่มีนามสกุลไฟล์ .jpg / .png
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="dl_id" class="col-sm-3 col-form-label">เลือกชื่อร้านผู้จำหน่าย</label>
                                 <div class="col-sm-9">
                                   <select class="form-control" id = "dl_id" name="dl_id" required>
@@ -275,4 +258,3 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php } ?>

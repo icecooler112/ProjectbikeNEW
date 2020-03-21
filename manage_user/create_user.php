@@ -23,15 +23,63 @@
 </head>
 <body>
   <?php
-        require_once('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
-        /**
-         * ตรวจสอบเงื่อนไขที่ว่า ตัวแปร $_POST['submit'] ได้ถูกกำหนดขึ้นมาหรือไม่
-         */
-        if(isset($_POST['submit'])){
+  include('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
+
+  /**
+   * ตรวจสอบเงื่อนไขที่ว่า ตัวแปร $_POST['submit'] ได้ถูกกำหนดขึ้นมาหรือไม่
+   */
+  if(isset($_POST['submit'])){
+    $first_name = $_POST["first_name"];
+    $last_name = $_POST["last_name"];
+    $idcard = $_POST["idcard"];
+    $phone = $_POST["phone"];
+    $email = $_POST["email"];
+    $check = "SELECT * FROM user  WHERE  first_name = '$first_name' AND last_name = '$last_name'";
+     $result = $conn->query($check) or die(mysql_error());
+
+        if($result->num_rows > 0)
+        {
+         echo "<script>";
+            echo "alert('มีชื่อลูกค้านี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+               echo "window.location='create_user.php';";
+         echo "</script>";
+
+       }else {
+
+         $check2 = "SELECT * FROM user  WHERE  idcard = '$idcard'";
+          $result = $conn->query($check2) or die(mysql_error());
+          if($result->num_rows > 0)
+          {
+            echo "<script>";
+               echo "alert('มีรหัสบัตรประจำตัวประชาชนนี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+                  echo "window.location='create_user.php';";
+            echo "</script>";
+          }else{
+            $check3 = "SELECT * FROM user  WHERE  phone = '$phone'";
+             $result = $conn->query($check3) or die(mysql_error());
+             if($result->num_rows > 0)
+             {
+               echo "<script>";
+                  echo "alert('มีเบอร์โทรศัพท์นี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+                     echo "window.location='create_user.php';";
+               echo "</script>";
+             }else{
+               $check4 = "SELECT * FROM user  WHERE  email = '$email'";
+                $result = $conn->query($check4) or die(mysql_error());
+                if($result->num_rows > 0)
+                {
+                  echo "<script>";
+                     echo "alert('มี Email นี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+                        echo "window.location='create_user.php';";
+                  echo "</script>";
+                }else{
 
                 $sql = "INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `idcard`, `user_address`, `phone`, `email`, `user_facebook`, `user_line`)
-                        VALUES (NULL,'".$_POST['first_name']."','".$_POST['last_name']."','".$_POST['idcard']."','".$_POST['user_address']."','".$_POST['phone']."','".$_POST['email']."','".$_POST['user_facebook']."','".$_POST['user_line']."');";
-                        $result = $conn->query($sql);
+                        VALUES (NULL,'".$first_name."','".$last_name."','".$idcard."','".$_POST['user_address']."','".$phone."','".$email."','".$_POST['user_facebook']."','".$_POST['user_line']."');";
+                        $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
+                      }
+                      mysqli_close($conn);
+
 
                 if($result){
                     echo '<script> alert("สำเร็จ! เพิ่มข้อมูลลูกค้าเรียบร้อย!")</script>';
@@ -39,10 +87,12 @@
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลลูกค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_user.php');
-
-
+                    }
+                  }
+                }
+              }
             }
-        }
+
     ?>
   <div class="wrapper">
        <!-- Sidebar  -->
@@ -128,7 +178,7 @@
                                <div class="form-group row">
                                    <label for="first_name" class="col-sm-3 col-form-label">ชื่อ</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                       <input type="text" class="form-control" id="first_name" name="first_name" pattern="[A-Za-zก-๙]{1,}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกชื่อลูกค้า
                                        </div>
@@ -137,7 +187,7 @@
                                <div class="form-group row">
                                    <label for="last_name" class="col-sm-3 col-form-label">นามสกุล</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="last_name" name="last_name" required>
+                                       <input type="text" class="form-control" id="last_name" name="last_name" pattern="[A-Za-zก-๙]{1,}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกนามสกุลลูกค้า
                                        </div>
@@ -146,7 +196,7 @@
                                <div class="form-group row">
                                    <label for="idcard" class="col-sm-3 col-form-label">รหัสบัตรปรจำตัวประชาชน</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="idcard" onKeyUp="IsNumeric(this.value,this)" name="idcard" required>
+                                       <input type="text" class="form-control" pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 ตัวเท่านั้น" id="idcard" onKeyUp="IsNumeric(this.value,this)" name="idcard" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกรหัสบัรหัสบัตรประจำตัวประชาชน 13 หลัก
                                        </div>
@@ -164,7 +214,7 @@
                                <div class="form-group row">
                                    <label for="phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="phone" onKeyUp="IsNumeric(this.value,this)"  name="phone" required>
+                                       <input type="text" class="form-control" id="phone" onKeyUp="IsNumeric(this.value,this)" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" name="phone" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>
@@ -173,7 +223,7 @@
                                <div class="form-group row">
                                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" id="email" name="email" required>
+                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกอีเมลล์ ตามรูปแบบที่กำหนด (@hotmail.com / @gmail.com)
                                        </div>
@@ -224,4 +274,4 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php } ?>
+  <?php } ?>
