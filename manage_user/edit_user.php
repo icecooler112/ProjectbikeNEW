@@ -36,7 +36,26 @@ if (empty($row)) {
   <?php
 
         if(isset($_POST['submit'])){
+          #SELECT OLD Data
+          $sqlData = "SELECT * FROM user WHERE user_id={$_POST['user_id']}";
+          $queryData = $conn->query($sqlData);
+          $data = $queryData->fetch_assoc();
 
+          #SELECT CHECK Data
+          $sqlCheck = "SELECT * FROM user WHERE first_name='{$_POST["first_name"]}'";
+          $queryCheck = $conn->query($sqlCheck);
+          $check = $queryCheck->num_rows;
+
+            $has = true;
+            if( $data["first_name"] == $_POST["first_name"] ){
+              $has = false;
+            }
+
+              if( !empty($check) && $has ){
+              echo '<script> alert("ตรวจสอบพบข้อมูลซ้ำในระบบ !")</script>';
+              header('Refresh:0;');
+              exit;
+            }
                 $sql = "UPDATE `user`
                         SET `first_name` = '".$_POST['first_name']."',
                           `last_name` = '".$_POST['last_name']."',
@@ -189,7 +208,7 @@ if (empty($row)) {
                                <div class="form-group row">
                                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php echo $row['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="<?php echo $row['email']; ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกอีเมลล์ ตามรูปแบบที่กำหนด (@hotmail.com / @gmail.com)
                                        </div>

@@ -111,7 +111,7 @@
                 <td><?php echo $row['pname']; ?></td>
                 <td><?php echo $row['num']; ?> </td>
                 <td><?php echo $row['price']; ?> บาท</td>
-                </td>
+                <?php } ?>
               </tr>
     </tbody>
   </table>
@@ -135,4 +135,3 @@
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
-<?php } ?>

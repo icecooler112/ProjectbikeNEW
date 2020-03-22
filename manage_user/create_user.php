@@ -214,7 +214,7 @@
                                <div class="form-group row">
                                    <label for="phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="phone" onKeyUp="IsNumeric(this.value,this)" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" name="phone" required>
+                                       <input type="text" class="form-control" id="phone" maxlength="10" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" name="phone" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>
@@ -223,7 +223,7 @@
                                <div class="form-group row">
                                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกอีเมลล์ ตามรูปแบบที่กำหนด (@hotmail.com / @gmail.com)
                                        </div>
@@ -250,24 +250,7 @@
                </div>
            </div>
        </div>
-    <script>
-            // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
-            function IsNumeric(sText, obj) {
-                var ValidChars = "0123456789";
-                var IsNumber = true;
-                var Char;
-                for (i = 0; i < sText.length && IsNumber == true; i++) {
-                    Char = sText.charAt(i);
-                    if (ValidChars.indexOf(Char) == -1) {
-                        IsNumber = false;
-                    }
-                }
-                if (IsNumber == false) {
-                    alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
-                    obj.value = sText.substr(0, sText.length - 10);
-                }
-            }
-        </script>
+
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

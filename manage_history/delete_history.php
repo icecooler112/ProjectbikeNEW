@@ -4,7 +4,6 @@
 if (isset($id)){
         $sql = "DELETE FROM history WHERE `history`.`h_id` = '".$id."'";
         $result = $conn->query($sql);
-
         $sql1 = "DELETE FROM detail_repair WHERE `detail_repair`.`h_id` = '".$id."'";
         $results = $conn->query($sql1);
 if ($result == TRUE AND $results == TRUE){

@@ -114,7 +114,7 @@
              <tbody>
              <?php
 
-                      $sql = "SELECT * FROM history AS h1 INNER JOIN user AS h2 ON h1.user_id = h2.user_id INNER JOIN detail_repair AS h3 ON h1.h_id = h3.h_id INNER JOIN product AS h4 ON h3.p_id = h4.p_id WHERE h3.h_id ";
+                      $sql = "SELECT * FROM history INNER JOIN user ON history.user_id = user.user_id  ";
                       $result = $conn->query($sql);
                       $num = 0;
 

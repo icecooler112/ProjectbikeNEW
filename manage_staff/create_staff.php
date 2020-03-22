@@ -129,7 +129,7 @@
                                <div class="form-group row">
                                    <label for="staff_fname" class="col-sm-3 col-form-label">ชื่อ</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="staff_fname" name="staff_fname" required>
+                                       <input type="text" class="form-control" id="staff_fname" name="staff_fname" pattern="[A-Za-zก-๙]{1,}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกชื่อพนักงาน
                                        </div>
@@ -138,7 +138,7 @@
                                <div class="form-group row">
                                    <label for="staff_lname" class="col-sm-3 col-form-label">นามสกุล</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="staff_lname" name="staff_lname" required>
+                                       <input type="text" class="form-control" id="staff_lname" name="staff_lname" pattern="[A-Za-zก-๙]{1,}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกนามสกุลพนักงาน
                                        </div>
@@ -157,7 +157,7 @@
                                <div class="form-group row">
                                    <label for="staff_email" class="col-sm-3 col-form-label">Email</label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" id="staff_email" name="staff_email" required>
+                                       <input type="email" class="form-control" id="staff_email" name="staff_email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกอีเมลล์ ตามรูปแบบที่กำหนด (@hotmail.com / @gmail.com)
                                        </div>
@@ -166,7 +166,7 @@
                                <div class="form-group row">
                                    <label for="staff_phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="staff_phone" onKeyUp="IsNumeric(this.value,this)"  name="staff_phone" required>
+                                       <input type="text" class="form-control" id="staff_phone"   name="staff_phone" maxlength="10" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์โทรศัพท์
                                        </div>
@@ -193,24 +193,7 @@
                </div>
            </div>
        </div>
-    <script>
-            // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
-            function IsNumeric(sText, obj) {
-                var ValidChars = "0123456789";
-                var IsNumber = true;
-                var Char;
-                for (i = 0; i < sText.length && IsNumber == true; i++) {
-                    Char = sText.charAt(i);
-                    if (ValidChars.indexOf(Char) == -1) {
-                        IsNumber = false;
-                    }
-                }
-                if (IsNumber == false) {
-                    alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
-                    obj.value = sText.substr(0, sText.length - 10);
-                }
-            }
-        </script>
+
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

@@ -106,8 +106,10 @@ $sql = "SELECT user_id
 FROM `user` WHERE user_id = '$id'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-
-
+if (empty($row)) {
+  echo '<script> alert("ไม่พบข้อมูล !") </script>';
+  echo '<script> window.location = "../user.php"</script>';
+}
 ?>
 <a href="../manage_bike/create_bike.php?id=<?php echo $row['user_id']; ?> " class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูข้อมูลรถจักรยานยนต์ </a>
 

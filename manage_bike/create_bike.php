@@ -179,7 +179,7 @@ $row = $result->fetch_assoc();
                              <div class="form-group row">
                                  <label for="year_bike" class="col-sm-3 col-form-label">ปีของรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike" onKeyUp="IsNumeric(this.value,this)" name="year_bike"  required>
+                                     <input type="text" class="form-control" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike" name="year_bike"  required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกปีของรถ
                                      </div>
@@ -206,24 +206,7 @@ $row = $result->fetch_assoc();
            </div>
        </div>
        <?php } ?>
-    <script>
-            // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
-            function IsNumeric(sText, obj) {
-                var ValidChars = "0123456789";
-                var IsNumber = true;
-                var Char;
-                for (i = 0; i < sText.length && IsNumber == true; i++) {
-                    Char = sText.charAt(i);
-                    if (ValidChars.indexOf(Char) == -1) {
-                        IsNumber = false;
-                    }
-                }
-                if (IsNumber == false) {
-                    alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
-                    obj.value = sText.substr(0, sText.length - 10);
-                }
-            }
-        </script>
+
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

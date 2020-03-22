@@ -12,7 +12,7 @@
 </head>
 <body>
     <?php
-        require_once('connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
+        include('connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน
         /**
          * ตรวจสอบเงื่อนไขที่ว่า ตัวแปร $_POST['submit'] ได้ถูกกำหนดขึ้นมาหรือไม่
          */
@@ -22,32 +22,30 @@
              */
             $username =  $conn->real_escape_string($_POST['username']);
             $password = $conn->real_escape_string($_POST['password']);
+
             /**
              * สร้างตัวแปร $sql เพื่อเก็บคำสั่ง Sql
              * จากนั้นให้ใช้คำสั่ง $conn->query($sql) เพื่อที่จะประมาณผลการทำงานของคำสั่ง sql
              */
-            $sql = "SELECT * FROM `admin_lg` WHERE `username` = '".$username."' AND `password` = '".$password."'";
+           $sql = "SELECT * FROM admin_lg WHERE username = '" . $username . "'";
             $result = $conn->query($sql);
-
-            /**
-             * ตรวจสอบการเข้าสู่ระบบ
-             */
-            if($result->num_rows > 0){
-                /**
-                 * แสดงข้อมูลของ user
-                 * เก็บข้อมูลเข้าสู่ session เพื่อนำไปใช้งาน
-                 */
                 $row = $result->fetch_assoc();
+
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user_id'] = $row['user_id'];
+                $_SESSION['username'] = $row['username'];
                 $_SESSION['First_Name'] = $row['First_Name'];
                 $_SESSION['Last_Name'] = $row['Last_Name'];
-                header('location:index.php');
+                $results = $conn->query($sql);
+
+          if ($results) {
+            header('location:index.php');
             }else{
               echo '<script> alert("แจ้งเตือน! Username หรือ Password ไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")</script>';
               header('Refresh:0;');
             }
         }
+
     ?>
     <div class="container">
         <div class="row">

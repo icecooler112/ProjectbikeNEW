@@ -52,11 +52,16 @@ $sql = "SELECT  * FROM `product`";
       if(isset($_POST['submit'])){
 
         // print_r($_POST);die;
-
+        if (empty($_POST["lists"])) {
+            echo '<script> alert("กรุณาเลือกรายการอะไหล่ที่ต้องการ!")</script>';
+            header("Refresh:0; url=index.php");
+            exit;
+        }
               $sql_history = "INSERT INTO `history` (`h_id`, `bike_id`,`user_id`, `datetime`, `h_detail`, `staff_id`)
                       VALUES (NULL,'".$_POST['bike_id']."','".$_POST['user_id']."','".$_POST['datetime']."','".$_POST['h_detail']."','".$_POST['staff_id']."');";
               $result_history = $conn->query($sql_history);
               $h_id = $conn->insert_id;
+
 
               foreach($_POST["lists"] as $key => $Id_stock){
               $sqlStock = "SELECT price,numproduct FROM product WHERE p_id={$Id_stock}";
@@ -111,6 +116,7 @@ $sql = "SELECT  * FROM `product`";
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
              
+
          </ul>
        </nav>
        <!-- Page Content  -->

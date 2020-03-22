@@ -174,7 +174,7 @@ if (empty($row)) {
                             <div class="form-group row">
                                 <label for="price" class="col-sm-3 col-form-label">ราคา</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="price" onKeyUp="IsNumeric(this.value,this)" name="price" value="<?php echo $row["price"]; ?>" required>
+                                    <input type="text" class="form-control" id="price" name="price" value="<?php echo $row["price"]; ?>" pattern="[0-9]{1,}" title="กรุณากรอกตัวเลข 0-9 เท่านั้น" required>
                                     <div class="invalid-feedback">
                                         กรุณากรอกราคาสินค้า
                                     </div>
@@ -183,7 +183,7 @@ if (empty($row)) {
                             <div class="form-group row">
                                 <label for="price" class="col-sm-3 col-form-label">จำนวนสินค้า</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="numproduct" onKeyUp="IsNumeric(this.value,this)" name="numproduct" value="<?php echo $row["numproduct"]; ?>" required>
+                                    <input type="text" class="form-control" id="numproduct" name="numproduct" value="<?php echo $row["numproduct"]; ?>" pattern="[0-9]{1,}" title="กรุณากรอกตัวเลข 0-9 เท่านั้น" required>
                                     <div class="invalid-feedback">
                                         กรุณากรอกจำนวนสินค้า
                                     </div>
@@ -213,17 +213,17 @@ if (empty($row)) {
                                   </div>
                                 </div>
                                 <div class="col-sm-4">
-                                  <select class="form-control" id="num_insurance" name="num_insurance" required>
-                                    <option value="<?php echo $row['num_insurance']; ?>" hidden selected><?php echo $row["num_insurance"]; ?></option>
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                  </select>
+                                  <select select class="form-control" name='num_insurance' id='num_insurance' required>
+                              <option value="<?php echo $row["num_insurance"]; ?>" disabled selected> <?php echo $row["num_insurance"]; ?> </option>
+                              <?php for ($i = 0; $i <= 12; $i++) {
+                              ?>
+                                  <option value='<?= sprintf("%01d", $i) ?>'><?= sprintf("%01d", $i) ?></option>
+                              <?php
+                              }
+                              ?>
+                          </select>
                                   <div class="invalid-feedback">
-                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 0)
+                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 00)
                                   </div>
                                 </div>
                                 </div>
@@ -253,24 +253,7 @@ if (empty($row)) {
            </div>
            </div>
            </div>
-           <script>
-            // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
-            function IsNumeric(sText, obj) {
-                var ValidChars = "0123456789,";
-                var IsNumber = true;
-                var Char;
-                for (i = 0; i < sText.length && IsNumber == true; i++) {
-                    Char = sText.charAt(i);
-                    if (ValidChars.indexOf(Char) == -1) {
-                        IsNumber = false;
-                    }
-                }
-                if (IsNumber == false) {
-                    alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
-                    obj.value = sText.substr(0, sText.length - 10);
-                }
-            }
-           </script>
+
 
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
