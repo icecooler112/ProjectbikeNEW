@@ -173,7 +173,7 @@ if (empty($row)) {
                              <div class="form-group row">
                                  <label for="color" class="col-sm-3 col-form-label">สีรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" id="color" name="color" pattern="[ก-๙A-Za-z]{1,}" value="<?php echo $row['color']; ?>" required>
+                                     <input type="text" class="form-control" id="color" name="color" pattern="[ก-๙A-Za-z]{1,}" value="<?php  echo $row['color']; ?>" required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกสีรถ
                                      </div>
@@ -182,7 +182,7 @@ if (empty($row)) {
                              <div class="form-group row">
                                  <label for="year_bike" class="col-sm-3 col-form-label">ปีของรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike"  name="year_bike" value="<?php echo $row['year_bike']; ?>"  required>
+                                     <input type="text" class="form-control" maxlength="4" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike"  name="year_bike" value="<?php echo $row['year_bike']; ?>"  required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกปีของรถ
                                      </div>

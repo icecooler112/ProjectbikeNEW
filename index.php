@@ -53,8 +53,8 @@ $sql = "SELECT  * FROM `product`";
 
         // print_r($_POST);die;
         if (empty($_POST["lists"])) {
-            echo '<script> alert("กรุณาเลือกรายการอะไหล่ที่ต้องการ!")</script>';
-            header("Refresh:0; url=index.php");
+            echo '<script> alert("กรุณาเลือกรายการอะไหล่!")</script>';
+            header("Refresh:0;");
             exit;
         }
               $sql_history = "INSERT INTO `history` (`h_id`, `bike_id`,`user_id`, `datetime`, `h_detail`, `staff_id`)
@@ -115,7 +115,7 @@ $sql = "SELECT  * FROM `product`";
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             
+            
 
          </ul>
        </nav>
@@ -239,10 +239,10 @@ $sql = "SELECT  * FROM `product`";
                                                     <tr>
                                                         <th width="5%">ลำดับ</th>
                                                         <th width="40%">รายการอะไหล่</th>
-                                                        <th width="10%">ราคาอะไหล่</th>
-                                                        <th width="10%">สินค้าในคลัง</th>
+                                                        <th width="20%">ราคาอะไหล่</th>
+                                                        <th width="20%">สินค้าในคลัง</th>
                                                         <th width="5%">จำนวน</th>
-                                                        <th width="10%">เลือกรายการ</th>
+                                                        <th width="10w%">เลือกรายการ</th>
                                                     </tr>
                                                 </thead>
                                                 <!-- คำสั่งในการแสดงข้อมูลใน Table = product ทั้งหมด -->
@@ -259,7 +259,7 @@ $sql = "SELECT  * FROM `product`";
                                                             <td><?php echo $num; ?></td>
                                                             <td><?php echo $row['pname']; ?></td>
                                                             <td><?php echo number_format($row['price']); ?> บาท</td>
-                                                            <td class="tr-stocknum"><input type="text " class="form-control stocknum" value="<?php echo $row['numproduct']; ?>" disabled></td>
+                                                            <td class="tr-stocknum"><input type="text " class="form-control stocknum text-center" value="<?php echo $row['numproduct']; ?>" disabled></td>
                                                             <td><input type="number" class="form-control js-stocknum" id="product-num" name="Pnum[<?=$row["p_id"]?>]" value="1"></td>
                                                             <td>
                                                                 <div class="custom-control custom-checkbox">

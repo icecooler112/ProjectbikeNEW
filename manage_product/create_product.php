@@ -179,6 +179,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="dl_insurance" class="col-sm-3 col-form-label">การรับประกันสินค้า</label>
                                 <div class="col-sm-5">
@@ -190,7 +191,7 @@
                                     <option>ตลอดชีพ</option>
                                   </select>
                                   <div class="invalid-feedback">
-                                      กรุณาเลือกการรัการรับประกันสินค้า
+                                      กรุณาเลือกการรับประกันสินค้า
                                   </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -204,7 +205,7 @@
                               ?>
                           </select>
                                   <div class="invalid-feedback">
-                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 00)
+                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 0)
                                   </div>
                                 </div>
                                 </div>

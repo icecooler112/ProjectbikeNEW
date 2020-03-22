@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2020 at 01:50 PM
+-- Generation Time: Mar 22, 2020 at 04:00 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin_lg` (
   `id` int(11) NOT NULL,
   `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `First_Name` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
   `Last_Name` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
   `status` varchar(10) COLLATE utf8_unicode_ci NOT NULL
@@ -42,7 +42,7 @@ CREATE TABLE `admin_lg` (
 --
 
 INSERT INTO `admin_lg` (`id`, `username`, `password`, `First_Name`, `Last_Name`, `status`) VALUES
-(1, 'icecooler112', '0953103854', 'Bunditpong', 'Tapinta', 'admin');
+(6, 'admin', '$2y$10$ygQSVDRCaKRw8iQ/RbvzkuKZbLu.FglB7lat6jidWcVia9EkVBjru', 'Bunditpong', 'Tapinta', 'admin');
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ CREATE TABLE `bike_user` (
   `user_id` int(11) NOT NULL,
   `bike_id` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
   `color` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `year_bike` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `year_bike` varchar(4) COLLATE utf8_unicode_ci NOT NULL,
   `brand` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -101,7 +101,7 @@ CREATE TABLE `detail_repair` (
   `bike_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `p_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `num` int(11) NOT NULL
+  `num` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -109,8 +109,8 @@ CREATE TABLE `detail_repair` (
 --
 
 INSERT INTO `detail_repair` (`dt_id`, `h_id`, `bike_id`, `p_id`, `price`, `num`) VALUES
-(12, 12, 'กง 1151', 8, 1600, 1),
-(14, 14, 'กง 1151', 30, 1600, 1);
+(45, 46, 'กง1151', 30, 1600, 1),
+(46, 46, 'กง1151', 31, 350, 1);
 
 -- --------------------------------------------------------
 
@@ -132,16 +132,7 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`h_id`, `bike_id`, `user_id`, `datetime`, `h_detail`, `staff_id`) VALUES
-(12, 'กง 1151', 1, '2020-03-16 16:01:19', 'ฟหกฟหกฟหก', 1),
-(14, 'กง 1151', 1, '2020-03-17 18:24:55', 'เปลี่ยนโซ่', 1),
-(15, 'กง 1151', 1, '2020-03-21 12:53:42', 'AS', 1),
-(16, 'กง 1151', 1, '2020-03-21 12:53:53', 'ASD', 1),
-(18, 'กง 1151', 1, '2020-03-21 18:56:25', 'asdasd', 1),
-(19, 'กง 1151', 1, '2020-03-21 18:56:25', 'asdasd', 1),
-(20, 'กง 1151', 1, '2020-03-21 19:03:36', 'sadasdas', 1),
-(21, 'กง 1151', 1, '2020-03-21 19:03:36', 'sadasdas', 1),
-(22, 'กง 1151', 1, '2020-03-21 19:03:36', 'sadasdas', 1),
-(23, 'กง 1151', 1, '2020-03-21 19:06:24', 'sadasdas', 1);
+(46, 'กง1151', 1, '2020-03-22 14:58:00', 'asdasdasd', 1);
 
 -- --------------------------------------------------------
 
@@ -153,7 +144,7 @@ CREATE TABLE `product` (
   `p_id` int(11) NOT NULL,
   `pname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `price` int(11) NOT NULL,
-  `numproduct` int(11) NOT NULL,
+  `numproduct` int(7) NOT NULL,
   `detail` text COLLATE utf8_unicode_ci NOT NULL,
   `dl_id` int(11) NOT NULL,
   `dl_insurance` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
@@ -165,8 +156,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`p_id`, `pname`, `price`, `numproduct`, `detail`, `dl_id`, `dl_insurance`, `num_insurance`) VALUES
-(30, 'โซ่ DID. O-ring สีทอง 120L', 1600, 15, ' ใช้ได้กับรถ Wave 125 / Wave 110i', 2, 'ไม่มี', '0'),
-(31, 'น้ำมันเครื่อง', 350, 20, 'ใช้ได้กับรถจักรยานยนต์ Wave125 / Wave 110i', 2, 'ไม่มี', '0');
+(30, 'โซ่ DID. O-ring สีทอง 120L', 1600, 98, '  ใช้ได้กับรถ Wave 125 / Wave 110i', 2, 'ไม่มี', '0'),
+(31, 'น้ำมันเครื่อง', 350, 97, ' ใช้ได้กับรถจักรยานยนต์ Wave125 / Wave 110i', 2, 'ไม่มี', '0');
 
 -- --------------------------------------------------------
 
@@ -276,7 +267,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin_lg`
 --
 ALTER TABLE `admin_lg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `bike_user`
@@ -294,13 +285,13 @@ ALTER TABLE `dealer`
 -- AUTO_INCREMENT for table `detail_repair`
 --
 ALTER TABLE `detail_repair`
-  MODIFY `dt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `dt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `h_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `h_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -312,7 +303,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`

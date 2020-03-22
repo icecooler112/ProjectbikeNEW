@@ -28,9 +28,46 @@
          * ตรวจสอบเงื่อนไขที่ว่า ตัวแปร $_POST['submit'] ได้ถูกกำหนดขึ้นมาหรือไม่
          */
         if(isset($_POST['submit'])){
+          $staff_fname = $_POST["staff_fname"];
+          $staff_lname = $_POST["staff_lname"];
+          $staff_email = $_POST["staff_email"];
+          $staff_phone = $_POST["staff_phone"];
+          $check1 = "SELECT * FROM staff  WHERE  staff_fname = '$staff_fname' AND staff_lname = '$staff_lname'";
+           $result = $conn->query($check1) or die(mysql_error());
+
+              if($result->num_rows > 0)
+              {
+               echo "<script>";
+                  echo "alert('มีชื่อนี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+                     echo "window.location='create_staff.php';";
+               echo "</script>";
+
+             }else {
+               $check2 = "SELECT * FROM staff  WHERE  staff_email = '$staff_email' ";
+                $result = $conn->query($check2) or die(mysql_error());
+
+                   if($result->num_rows > 0)
+                   {
+                    echo "<script>";
+                       echo "alert('มี Email นี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+                          echo "window.location='create_staff.php';";
+                    echo "</script>";
+
+                  }else {
+                    $check3 = "SELECT * FROM staff  WHERE  staff_phone = '$staff_phone' ";
+                     $result = $conn->query($check3) or die(mysql_error());
+
+                        if($result->num_rows > 0)
+                        {
+                         echo "<script>";
+                            echo "alert('มีเบอร์โทรศัพท์นี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+                               echo "window.location='create_staff.php';";
+                         echo "</script>";
+
+                       }else {
 
                 $sql = "INSERT INTO `staff` (`staff_id`, `staff_fname`, `staff_lname`, `staff_address`, `staff_email`, `staff_phone`, `staff_duty`)
-                        VALUES (NULL,'".$_POST['staff_fname']."','".$_POST['staff_lname']."','".$_POST['staff_address']."','".$_POST['staff_email']."','".$_POST['staff_phone']."','".$_POST['staff_duty']."');";
+                        VALUES (NULL,'".$staff_fname."','".$staff_lname."','".$_POST['staff_address']."','".$staff_email."','".$staff_phone."','".$_POST['staff_duty']."');";
                 $result = $conn->query($sql);
 
 
@@ -40,10 +77,12 @@
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลพนักงานได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_staff.php');
-
-
+                  }
+                }
             }
         }
+      }
+    }
     ?>
   <div class="wrapper">
        <!-- Sidebar  -->
@@ -200,4 +239,3 @@
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php } ?>

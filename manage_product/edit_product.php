@@ -209,7 +209,7 @@ if (empty($row)) {
                                     <option>ตลอดชีพ</option>
                                   </select>
                                   <div class="invalid-feedback">
-                                      กรุณาเลือกการรัการรับประกันสินค้า
+                                      กรุณาเลือการรับประกันสินค้า
                                   </div>
                                 </div>
                                 <div class="col-sm-4">

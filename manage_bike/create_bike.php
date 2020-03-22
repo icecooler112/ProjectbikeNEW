@@ -179,7 +179,7 @@ $row = $result->fetch_assoc();
                              <div class="form-group row">
                                  <label for="year_bike" class="col-sm-3 col-form-label">ปีของรถ</label>
                                  <div class="col-sm-9">
-                                     <input type="text" class="form-control" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike" name="year_bike"  required>
+                                     <input type="text" class="form-control" maxlength="4" pattern="[0-9]{4}" title="กรุณากรอกตัวเลข 0-9 จำนวน 4 ตัวเท่านั้น" id="year_bike" name="year_bike"  required>
                                      <div class="invalid-feedback">
                                          กรุณากรอกปีของรถ
                                      </div>

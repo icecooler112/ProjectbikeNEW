@@ -37,6 +37,27 @@ if (empty($row)) {
 
         if(isset($_POST['submit'])){
 
+          #SELECT OLD Data
+          $sqlData = "SELECT * FROM staff WHERE staff_id={$_POST['staff_id']}";
+          $queryData = $conn->query($sqlData);
+          $data = $queryData->fetch_assoc();
+
+          #SELECT CHECK Data
+          $sqlCheck = "SELECT * FROM staff WHERE staff_fname='{$_POST["staff_fname"]}'";
+          $queryCheck = $conn->query($sqlCheck);
+          $check = $queryCheck->num_rows;
+
+            $has = true;
+            if( $data["staff_fname"] == $_POST["staff_fname"] ){
+              $has = false;
+            }
+
+              if( !empty($check) && $has ){
+              echo '<script> alert("ตรวจสอบพบข้อมูลซ้ำในระบบ !")</script>';
+              header('Refresh:0;');
+              exit;
+            }
+
                 $sql = "UPDATE `staff`
                         SET `staff_id` = '".$_POST['staff_id']."',
                           `staff_fname` = '".$_POST['staff_fname']."',
