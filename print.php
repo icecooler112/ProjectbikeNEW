@@ -83,7 +83,7 @@
            }
 
            ?>
-           <span>วันและเวลาที่ซ่อม : </span> <?php echo $row['datetime']; ?>
+           <span>วันและเวลาที่ซ่อม : </span> <?php echo DateThai($row['datetime']); ?>
            <br>
             รายละเอียดการซ่อม : <?php echo $row['h_detail']; ?>
            <table class="table table-bordered text-center">

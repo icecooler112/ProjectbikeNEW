@@ -36,7 +36,7 @@
               if($result->num_rows > 0)
               {
                echo "<script>";
-  			          echo "alert('มีชื่อสินค้านี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
+  			          echo "alert('มีชื่อสินค้านี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง!!!');";
   			             echo "window.location='create_product.php';";
             	 echo "</script>";
 

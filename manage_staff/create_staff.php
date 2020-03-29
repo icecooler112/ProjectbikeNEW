@@ -205,7 +205,7 @@
                                <div class="form-group row">
                                    <label for="staff_phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="staff_phone"   name="staff_phone" maxlength="10" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" required>
+                                       <input type="text" class="form-control" id="staff_phone"   name="staff_phone" maxlength="10" pattern="[0][0-9]{9}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์โทรศัพท์
                                        </div>

@@ -42,20 +42,21 @@ if (empty($row)) {
           $data = $queryData->fetch_assoc();
 
           #SELECT CHECK Data
-          $sqlCheck = "SELECT * FROM user WHERE first_name='{$_POST["first_name"]}'";
+          $sqlCheck = "SELECT * FROM user WHERE first_name='{$_POST["first_name"]}' AND last_name='{$_POST["last_name"]}' ";
           $queryCheck = $conn->query($sqlCheck);
           $check = $queryCheck->num_rows;
 
             $has = true;
-            if( $data["first_name"] == $_POST["first_name"] ){
+            if( $data["first_name"] == $_POST["first_name"]
+            AND $data["last_name"] == $_POST["last_name"] ){
               $has = false;
             }
-
               if( !empty($check) && $has ){
               echo '<script> alert("ตรวจสอบพบข้อมูลซ้ำในระบบ !")</script>';
               header('Refresh:0;');
               exit;
             }
+
                 $sql = "UPDATE `user`
                         SET `first_name` = '".$_POST['first_name']."',
                           `last_name` = '".$_POST['last_name']."',
@@ -181,7 +182,7 @@ if (empty($row)) {
                                <div class="form-group row">
                                    <label for="idcard" class="col-sm-3 col-form-label">รหัสบัตรปรจำตัวประชาชน</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="idcard" onKeyUp="IsNumeric(this.value,this)" name="idcard" value="<?php echo $row['idcard']; ?>" pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 ตัวเท่านั้น" required>
+                                       <input type="text" class="form-control" id="idcard"  name="idcard" value="<?php echo $row['idcard']; ?>" pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 ตัวเท่านั้น" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกรหัสบัรหัสบัตรประจำตัวประชาชน 13 หลัก
                                        </div>
@@ -199,7 +200,7 @@ if (empty($row)) {
                                <div class="form-group row">
                                    <label for="phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="phone" onKeyUp="IsNumeric(this.value,this)"  name="phone" value="<?php echo $row['phone']; ?>" pattern="[0-9]{10}" required>
+                                       <input type="text" class="form-control" id="phone"   name="phone" value="<?php echo $row['phone']; ?>"maxlength="10" pattern="[0][0-9]{9}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>
@@ -235,24 +236,7 @@ if (empty($row)) {
                </div>
            </div>
        </div>
-    <script>
-            // ตรวจสอบการกรอกข้อมูลชนิดที่ไม่ช่ตัวเลข
-            function IsNumeric(sText, obj) {
-                var ValidChars = "0123456789";
-                var IsNumber = true;
-                var Char;
-                for (i = 0; i < sText.length && IsNumber == true; i++) {
-                    Char = sText.charAt(i);
-                    if (ValidChars.indexOf(Char) == -1) {
-                        IsNumber = false;
-                    }
-                }
-                if (IsNumber == false) {
-                    alert("กรอกได้เฉพาะตัวเลข 0-9 เท่านั้น");
-                    obj.value = sText.substr(0, sText.length - 10);
-                }
-            }
-        </script>
+
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

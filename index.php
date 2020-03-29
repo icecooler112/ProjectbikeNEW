@@ -57,8 +57,8 @@ $sql = "SELECT  * FROM `product`";
             header("Refresh:0;");
             exit;
         }
-              $sql_history = "INSERT INTO `history` (`h_id`, `bike_id`,`user_id`, `datetime`, `h_detail`, `staff_id`)
-                      VALUES (NULL,'".$_POST['bike_id']."','".$_POST['user_id']."','".$_POST['datetime']."','".$_POST['h_detail']."','".$_POST['staff_id']."');";
+              $sql_history = "INSERT INTO `history` (`h_id`, `bu_id`,`user_id`, `datetime`, `h_detail`, `staff_id`)
+                      VALUES (NULL,'".$_POST['bu_id']."','".$_POST['user_id']."','".$_POST['datetime']."','".$_POST['h_detail']."','".$_POST['staff_id']."');";
               $result_history = $conn->query($sql_history);
               $h_id = $conn->insert_id;
 
@@ -68,8 +68,8 @@ $sql = "SELECT  * FROM `product`";
               $queryStock = $conn->query($sqlStock);
               $stock = $queryStock->fetch_assoc();
 
-              $sql_detail = "INSERT INTO `detail_repair` (`dt_id`, `h_id`,`bike_id`,`p_id`, `price`, `num`)
-              VALUES (NULL,'".$h_id."','".$_POST['bike_id']."','".$Id_stock."','".$stock['price']."','".$_POST['Pnum'][$Id_stock]."');";
+              $sql_detail = "INSERT INTO `detail_repair` (`dt_id`, `h_id`,`bu_id`,`p_id`, `price`, `num`)
+              VALUES (NULL,'".$h_id."','".$_POST['bu_id']."','".$Id_stock."','".$stock['price']."','".$_POST['Pnum'][$Id_stock]."');";
               $stc = $stock['numproduct'] - $_POST["Pnum"][$Id_stock];
               $sql9 = "UPDATE product SET numproduct = '$stc' WHERE p_id = $Id_stock";
                $conn->query($sql9);
@@ -115,7 +115,7 @@ $sql = "SELECT  * FROM `product`";
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-            
+
 
          </ul>
        </nav>
@@ -172,14 +172,14 @@ $sql = "SELECT  * FROM `product`";
                                       <div class="form-group row">
                                                        <label for="search" class="col-sm-3 col-form-label">เลขทะเบียนรถ</label>
                                                        <div class="col-sm-7">
-                                                           <input type="text" class="form-control" id="search" name="search" required value="<?= !empty($_GET["search"]) ? $_GET["search"] : "" ?>">
+                                                           <input type="text" class="form-control" id="search" name="search"  pattern="[ก-ฮ0-9]{1,}" title="กรอกได้เฉพาะ ก-ฮ และ 0-9 เท่านั้น" required value="<?= !empty($_GET["search"]) ? $_GET["search"] : "" ?>">
                                                        </div>
                                                        <button class="btn btn-primary mb-2 float-right" type="submit"><i class="fas fa-search"></i> ค้นหา </button>
                                                    </div>
                                                </form>
                                     <form  action="" method="POST" enctype="multipart/form-data">
                                       <input type="hidden" name="user_id" value="<?= !empty($datause["user_id"]) ? $datause["user_id"] : "" ?>">
-                                      <input type="hidden" name="bike_id" value="<?= !empty($databike["bike_id"]) ? $databike["bike_id"] : "" ?>">
+                                      <input type="hidden" name="bu_id" value="<?= !empty($databike["bu_id"]) ? $databike["bu_id"] : "" ?>">
                                     <div class="form-group row">
                                         <label for="first_name" class="col-sm-3 col-form-label">ชื่อ</label>
                                         <div class="col-sm-9">

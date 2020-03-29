@@ -34,14 +34,15 @@
     $idcard = $_POST["idcard"];
     $phone = $_POST["phone"];
     $email = $_POST["email"];
+
     $check = "SELECT * FROM user  WHERE  first_name = '$first_name' AND last_name = '$last_name'";
      $result = $conn->query($check) or die(mysql_error());
 
         if($result->num_rows > 0)
         {
          echo "<script>";
-            echo "alert('มีชื่อลูกค้านี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
-               echo "window.location='create_user.php';";
+            echo "alert('มีชื่อลูกค้านี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง!!!');";
+
          echo "</script>";
 
        }else {
@@ -51,8 +52,7 @@
           if($result->num_rows > 0)
           {
             echo "<script>";
-               echo "alert('มีรหัสบัตรประจำตัวประชาชนนี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
-                  echo "window.location='create_user.php';";
+               echo "alert('มีรหัสบัตรประจำตัวประชาชนนี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง!!!');";
             echo "</script>";
           }else{
             $check3 = "SELECT * FROM user  WHERE  phone = '$phone'";
@@ -60,8 +60,8 @@
              if($result->num_rows > 0)
              {
                echo "<script>";
-                  echo "alert('มีเบอร์โทรศัพท์นี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
-                     echo "window.location='create_user.php';";
+                  echo "alert('มีเบอร์โทรศัพท์นี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง!!!');";
+
                echo "</script>";
              }else{
                $check4 = "SELECT * FROM user  WHERE  email = '$email'";
@@ -69,8 +69,8 @@
                 if($result->num_rows > 0)
                 {
                   echo "<script>";
-                     echo "alert('มี Email นี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง!!!');";
-                        echo "window.location='create_user.php';";
+                     echo "alert('มี Email นี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง!!!');";
+
                   echo "</script>";
                 }else{
 
@@ -86,7 +86,7 @@
                     header('Refresh:0; url=../user.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลลูกค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
-                  header('Refresh:0; url=create_user.php');
+                  
                     }
                   }
                 }
@@ -178,7 +178,7 @@
                                <div class="form-group row">
                                    <label for="first_name" class="col-sm-3 col-form-label">ชื่อ</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="first_name" name="first_name" pattern="[A-Za-zก-๙]{1,}" required>
+                                       <input type="text" class="form-control" id="first_name" name="first_name" pattern="[A-Za-zก-๙]{1,}" required value="<?= !empty($_POST["first_name"]) ? $_POST["first_name"] : "" ?>">
                                        <div class="invalid-feedback">
                                            กรุณากรอกชื่อลูกค้า
                                        </div>
@@ -187,7 +187,7 @@
                                <div class="form-group row">
                                    <label for="last_name" class="col-sm-3 col-form-label">นามสกุล</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="last_name" name="last_name" pattern="[A-Za-zก-๙]{1,}" required>
+                                       <input type="text" class="form-control" id="last_name" name="last_name" pattern="[A-Za-zก-๙]{1,}" required value="<?= !empty($_POST["last_name"]) ? $_POST["last_name"] : "" ?>">
                                        <div class="invalid-feedback">
                                            กรุณากรอกนามสกุลลูกค้า
                                        </div>
@@ -196,7 +196,7 @@
                                <div class="form-group row">
                                    <label for="idcard" class="col-sm-3 col-form-label">รหัสบัตรปรจำตัวประชาชน</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 ตัวเท่านั้น" id="idcard" onKeyUp="IsNumeric(this.value,this)" name="idcard" required>
+                                       <input type="text" class="form-control" maxlength="13" pattern="[0-9]{13}" title="กรุณากรอกตัวเลข 0-9 จำนวน 13 ตัวเท่านั้น" id="idcard"  name="idcard" required value="<?= !empty($_POST["idcard"]) ? $_POST["idcard"] : "" ?>">
                                        <div class="invalid-feedback">
                                            กรุณากรอกรหัสบัรหัสบัตรประจำตัวประชาชน 13 หลัก
                                        </div>
@@ -205,7 +205,7 @@
                                <div class="form-group row">
                                    <label for="user_address" class="col-sm-3 col-form-label">ที่อยู่ลูกค้า</label>
                                    <div class="col-sm-9">
-                                       <textarea type="text" class="form-control" id="user_address" name="user_address" required></textarea>
+                                       <textarea type="text" class="form-control" id="user_address" name="user_address" required > <?= !empty($_POST["user_address"]) ? $_POST["user_address"] : "" ?> </textarea>
                                        <div class="invalid-feedback">
                                            กรุณากรอกที่อยู่
                                        </div>
@@ -214,7 +214,7 @@
                                <div class="form-group row">
                                    <label for="phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="phone" maxlength="10" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" name="phone" required>
+                                       <input type="text" class="form-control" id="phone" maxlength="10" pattern="[0][0-9]{9}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" name="phone" required value="<?= !empty($_POST["phone"]) ? $_POST["phone"] : "" ?>">
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>
@@ -223,7 +223,7 @@
                                <div class="form-group row">
                                    <label for="email" class="col-sm-3 col-form-label">Email</label>
                                    <div class="col-sm-9">
-                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                       <input type="email" class="form-control" id="email" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required value="<?= !empty($_POST["email"]) ? $_POST["email"] : "" ?>">
                                        <div class="invalid-feedback">
                                            กรุณากรอกอีเมลล์ ตามรูปแบบที่กำหนด (@hotmail.com / @gmail.com)
                                        </div>
@@ -232,13 +232,13 @@
                                <div class="form-group row">
                                    <label for="user_facebook" class="col-sm-3 col-form-label">Facebook</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="user_facebook" placeholder="ถ้ามี" name="user_facebook">
+                                       <input type="text" class="form-control" id="user_facebook" placeholder="ถ้ามี" name="user_facebook" value="<?= !empty($_POST["user_facebook"]) ? $_POST["user_facebook"] : "" ?>">
                                    </div>
                                </div>
                                <div class="form-group row">
                                    <label for="user_line" class="col-sm-3 col-form-label">Line</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="user_line" placeholder="ถ้ามี" name="user_line">
+                                       <input type="text" class="form-control" id="user_line" placeholder="ถ้ามี" name="user_line" value="<?= !empty($_POST["user_line"]) ? $_POST["user_line"] : "" ?>">
                                    </div>
                                </div>
 

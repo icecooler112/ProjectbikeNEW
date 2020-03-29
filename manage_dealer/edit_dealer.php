@@ -173,7 +173,7 @@ if (empty($row)) {
                                <div class="form-group row">
                                    <label for="dl_phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="dl_phone" name="dl_phone" value="<?php echo $row['dl_phone']; ?>" pattern="[0-9]{9,10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 9-10 ตัวเท่านั้น" required>
+                                       <input type="text" class="form-control" id="dl_phone" name="dl_phone" value="<?php echo $row['dl_phone']; ?>" pattern="[0][0-9]{8,9}" title="กรุณากรอกตัวเลข 0-9 จำนวน 9-10 ตัวเท่านั้น" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>

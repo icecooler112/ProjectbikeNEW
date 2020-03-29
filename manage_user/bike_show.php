@@ -111,7 +111,7 @@ if (empty($row)) {
   echo '<script> window.location = "../user.php"</script>';
 }
 ?>
-<a href="../manage_bike/create_bike.php?id=<?php echo $row['user_id']; ?> " class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูข้อมูลรถจักรยานยนต์ </a>
+<a href="../manage_bike/create_bike.php?id=<?php echo $row['user_id']; ?> " class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูลรถจักรยานยนต์ </a>
 
            <table class="table table-bordered text-center DataTable">
 

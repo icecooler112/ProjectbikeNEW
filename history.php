@@ -125,8 +125,8 @@
                        <tr>
                          <td><?php echo $num; ?></td>
                          <td value="<?php echo $row['user_id']; ?>"><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></td>
-                         <td><?php echo $row['h_detail']; ?></td>
-                         <td><?php echo $row['datetime']; ?></td>
+                         <td><?php echo  $row['h_detail']; ?></td>
+                         <td><?php echo DateThai($row['datetime']); ?></td>
 
                          <td>
                            <a href="print.php?id=<?php echo $row['h_id']; ?>" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>

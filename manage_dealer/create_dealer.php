@@ -29,20 +29,35 @@
          */
         if(isset($_POST['submit'])){
           $dl_nameshop = $_POST["dl_nameshop"];
+          $dl_email = $_POST["dl_email"];
+          $dl_phone = $_POST["dl_phone"];
+          $facebook = $_POST["facebook"];
+          $line = $_POST["line"];
           $check = "SELECT * FROM dealer  WHERE  dl_nameshop = '$dl_nameshop'";
 	         $result = $conn->query($check) or die(mysql_error());
 
               if($result->num_rows > 0)
               {
                echo "<script>";
-  			          echo "alert('มีชื่อร้านค้าผู้ข้อมูลผู้จำหน่ายนี้อยู่ในระบบแล้ว กรุกรุณาลองใหม่อีกครั้ง !!!');";
+  			          echo "alert('มีชื่อร้านค้าผู้ข้อมูลผู้จำหน่ายนี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !!!');";
   			             echo "window.location='create_dealer.php';";
             	 echo "</script>";
 
               }else{
+                $check1 = "SELECT * FROM dealer  WHERE  dl_e = '$dl_email'";
+      	         $result = $conn->query($check1) or die(mysql_error());
+
+                    if($result->num_rows > 0)
+                    {
+                     echo "<script>";
+        			          echo "alert('มี Email นี้อยู่ในระบบแล้ว กรุณาลองใหม่อีกครั้ง !!!');";
+        			             echo "window.location='create_dealer.php';";
+                  	 echo "</script>";
+
+                    }else{
 
                 $sql = "INSERT INTO `dealer` (`dl_id`, `dl_nameshop`, `dl_address`, `dl_email`, `dl_phone`, `facebook`, `line`)
-                        VALUES (NULL,'".$_POST['dl_nameshop']."','".$_POST['dl_address']."','".$_POST['dl_email']."','".$_POST['dl_phone']."','".$_POST['facebook']."','".$_POST['line']."');";
+                        VALUES (NULL,'".$dl_nameshop."','".$_POST['dl_address']."','".$_POST['dl_email']."','".$_POST['dl_phone']."','".$_POST['facebook']."','".$_POST['line']."');";
                         $result = mysqli_query($conn, $sql) or die ("Error in query: $sql " . mysqli_error());
                       }
                       mysqli_close($conn);
@@ -54,6 +69,7 @@
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลผู้จำหน่ายสินค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
                   header('Refresh:0; url=create_dealer.php');
+                }
             }
         }
     ?>
@@ -168,7 +184,7 @@
                                <div class="form-group row">
                                    <label for="dl_phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="dl_phone"  pattern="[0-9]{9,10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 9-10 ตัวเท่านั้น" name="dl_phone" required>
+                                       <input type="text" class="form-control" id="dl_phone"  pattern="[0][0-9]{8,9}" title="กรุณากรอกตัวเลข 0-9 จำนวน 9-10 ตัวเท่านั้น" name="dl_phone" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>
@@ -195,7 +211,7 @@
                </div>
            </div>
        </div>
-    
+
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>

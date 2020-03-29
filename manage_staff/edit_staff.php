@@ -43,12 +43,13 @@ if (empty($row)) {
           $data = $queryData->fetch_assoc();
 
           #SELECT CHECK Data
-          $sqlCheck = "SELECT * FROM staff WHERE staff_fname='{$_POST["staff_fname"]}'";
+          $sqlCheck = "SELECT * FROM staff WHERE staff_fname='{$_POST["staff_fname"]}' AND staff_fname='{$_POST["staff_lname"]}'";
           $queryCheck = $conn->query($sqlCheck);
           $check = $queryCheck->num_rows;
 
             $has = true;
-            if( $data["staff_fname"] == $_POST["staff_fname"] ){
+            if( $data["staff_fname"] == $_POST["staff_fname"]
+            AND $data["staff_lname"] == $_POST["staff_lname"]){
               $has = false;
             }
 
@@ -200,7 +201,7 @@ if (empty($row)) {
                                <div class="form-group row">
                                    <label for="staff_phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="staff_phone"   name="staff_phone" maxlength="10" pattern="[0-9]{10}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" value="<?php echo $row['staff_phone']; ?>" required>
+                                       <input type="text" class="form-control" id="staff_phone"   name="staff_phone" maxlength="10" pattern="[0][0-9]{9}" title="กรุณากรอกตัวเลข 0-9 จำนวน 10 ตัวเท่านั้น" value="<?php echo $row['staff_phone']; ?>" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์โทรศัพท์
                                        </div>

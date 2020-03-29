@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2020 at 04:00 PM
+-- Generation Time: Mar 27, 2020 at 01:54 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -87,7 +87,7 @@ CREATE TABLE `dealer` (
 --
 
 INSERT INTO `dealer` (`dl_id`, `dl_nameshop`, `dl_address`, `dl_email`, `dl_phone`, `facebook`, `line`) VALUES
-(2, 'Honda', 'asdasdsada', 'Honda@hotmail.com', '1234566789', 'HondaBigWing', '@Honda');
+(2, 'Honda', 'เชียงใหม่', 'Honda@hotmail.com', '053451234', 'HondaBigWing', '@Honda');
 
 -- --------------------------------------------------------
 
@@ -98,19 +98,11 @@ INSERT INTO `dealer` (`dl_id`, `dl_nameshop`, `dl_address`, `dl_email`, `dl_phon
 CREATE TABLE `detail_repair` (
   `dt_id` int(11) NOT NULL,
   `h_id` int(11) NOT NULL,
-  `bike_id` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
+  `bu_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `num` int(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `detail_repair`
---
-
-INSERT INTO `detail_repair` (`dt_id`, `h_id`, `bike_id`, `p_id`, `price`, `num`) VALUES
-(45, 46, 'กง1151', 30, 1600, 1),
-(46, 46, 'กง1151', 31, 350, 1);
 
 -- --------------------------------------------------------
 
@@ -120,19 +112,12 @@ INSERT INTO `detail_repair` (`dt_id`, `h_id`, `bike_id`, `p_id`, `price`, `num`)
 
 CREATE TABLE `history` (
   `h_id` int(11) NOT NULL,
-  `bike_id` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
+  `bu_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `datetime` datetime NOT NULL,
   `h_detail` text COLLATE utf8_unicode_ci NOT NULL,
   `staff_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `history`
---
-
-INSERT INTO `history` (`h_id`, `bike_id`, `user_id`, `datetime`, `h_detail`, `staff_id`) VALUES
-(46, 'กง1151', 1, '2020-03-22 14:58:00', 'asdasdasd', 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +141,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`p_id`, `pname`, `price`, `numproduct`, `detail`, `dl_id`, `dl_insurance`, `num_insurance`) VALUES
-(30, 'โซ่ DID. O-ring สีทอง 120L', 1600, 98, '  ใช้ได้กับรถ Wave 125 / Wave 110i', 2, 'ไม่มี', '0'),
+(30, 'โซ่ DID. O-ring สีทอง 120L', 1600, 96, '  ใช้ได้กับรถ Wave 125 / Wave 110i', 2, 'ไม่มี', '0'),
 (31, 'น้ำมันเครื่อง', 350, 97, ' ใช้ได้กับรถจักรยานยนต์ Wave125 / Wave 110i', 2, 'ไม่มี', '0');
 
 -- --------------------------------------------------------
@@ -205,7 +190,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `first_name`, `last_name`, `idcard`, `user_address`, `phone`, `email`, `user_facebook`, `user_line`) VALUES
-(1, 'สมศรี', 'ดีจริง', '1580300087300', '111/1 ต.แม่นาเติง อ.ปาย จ.แม่ฮ่องสอน', '0953103854', 'Somsee_112@hotmail.com', '', '');
+(1, 'สมศรี', 'ดีจริง', '1580300087300', '111/1 ต.แม่นาเติง อ.ปาย จ.แม่ฮ่องสอน', '0953103854', 'Somsee_112@hotmail.com', 'Somsee Deejing', 'Somsee');
 
 --
 -- Indexes for dumped tables
@@ -285,13 +270,13 @@ ALTER TABLE `dealer`
 -- AUTO_INCREMENT for table `detail_repair`
 --
 ALTER TABLE `detail_repair`
-  MODIFY `dt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `dt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `h_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `h_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -309,7 +294,7 @@ ALTER TABLE `staff`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

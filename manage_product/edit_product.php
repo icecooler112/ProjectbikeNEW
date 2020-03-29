@@ -214,7 +214,7 @@ if (empty($row)) {
                                 </div>
                                 <div class="col-sm-4">
                                   <select select class="form-control" name='num_insurance' id='num_insurance' required>
-                              <option value="<?php echo $row["num_insurance"]; ?>" disabled selected> <?php echo $row["num_insurance"]; ?> </option>
+                              <option value="<?php echo $row["num_insurance"]; ?>" selected hidden> <?php echo $row["num_insurance"]; ?> </option>
                               <?php for ($i = 0; $i <= 12; $i++) {
                               ?>
                                   <option value='<?= sprintf("%01d", $i) ?>'><?= sprintf("%01d", $i) ?></option>

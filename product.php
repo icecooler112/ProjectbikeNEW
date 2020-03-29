@@ -97,6 +97,8 @@
                </div>
            </nav>
 <center><p><h2>ข้อมูลสินค้า</h2></p></center>
+
+
 <a href="manage_product/create_product.php" class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูลสินค้า </a>
            <table class="table table-bordered text-center DataTable">
 
