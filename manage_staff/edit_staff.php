@@ -94,6 +94,9 @@ if (empty($row)) {
              <li>
                  <a href="../history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
+             <li>
+                 <a href="../evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+             </li>
              <li >
                  <a href="../user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>

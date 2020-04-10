@@ -75,6 +75,9 @@ if (empty($row)) {
              <li>
                  <a href="../history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
+             <li>
+                 <a href="../evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+             </li>
              <li class="active">
                  <a href="../user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>
@@ -88,7 +91,9 @@ if (empty($row)) {
              <li>
                  <a href="../dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-
+             <li>
+                 <a href="../show.php"><i class="fas fa-chart-line"></i> รายงานสถิติการใช้อะไหล่</a>
+             </li>
          </ul>
        </nav>
        <!-- Page Content  -->

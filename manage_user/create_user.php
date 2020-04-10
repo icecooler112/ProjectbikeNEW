@@ -86,7 +86,7 @@
                     header('Refresh:0; url=../user.php');
                 }else{
                   echo '<script> alert("ล้มเหลว! ไม่สามารถเพิ่มข้อมูลลูกค้าได้ กรุณาลองใหม่อีกครั้ง")</script>';
-                  
+
                     }
                   }
                 }
@@ -107,6 +107,9 @@
              </li>
              <li>
                  <a href="../history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
+             </li>
+             <li>
+                 <a href="../evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
              </li>
              <li class="active">
                  <a href="../user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
@@ -200,6 +203,7 @@
                                        <div class="invalid-feedback">
                                            กรุณากรอกรหัสบัรหัสบัตรประจำตัวประชาชน 13 หลัก
                                        </div>
+                                       <message style="color:red; font-size:10pt;" hidden class="mgs-idcard">รูปแบบบัตรประชาชนไม่ถูกต้อง</message>
                                    </div>
                                </div>
                                <div class="form-group row">
@@ -255,6 +259,37 @@
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+    function checkID(id)
+    {
+        if(id.length != 13) {
+          return false;
+        }
+        for(i=0, sum=0; i < 12; i++){
+            sum += parseFloat(id.charAt(i))*(13-i);
+        }
+        if((11-sum%11)%10!=parseFloat(id.charAt(12))){
+          return false;
+        }
+        else{
+          return true;
+        }
+    }
+
+    $("[name=idcard]").change(function(){
+      if( !checkID($(this).val()) ){
+        $(".mgs-idcard").attr('hidden', false);
+        $("[name=submit]").attr("disabled", true);
+      }
+      else{
+        $(".mgs-idcard").attr('hidden', true);
+        $("[name=submit]").attr("disabled", false);
+      }
+      if( $(this).val() == "" ){
+        $(".mgs-idcard").attr('hidden', true);
+      }
+    });
+    </script>
 </body>
 </html>
   <?php } ?>

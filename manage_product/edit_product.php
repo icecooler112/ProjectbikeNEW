@@ -97,6 +97,9 @@ if (empty($row)) {
                  <a href="../history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
              <li>
+                 <a href="../evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+             </li>
+             <li>
                  <a href="../user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>
              <li>
@@ -108,6 +111,9 @@ if (empty($row)) {
              </li>
              <li>
                  <a href="../dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
+             </li>
+             <li>
+                 <a href="../show.php"><i class="fas fa-chart-line"></i> รายงานสถิติการใช้อะไหล่</a>
              </li>
          </ul>
        </nav>
@@ -223,7 +229,7 @@ if (empty($row)) {
                               ?>
                           </select>
                                   <div class="invalid-feedback">
-                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 00)
+                                      กรุณาเลือกเวลาการรับประกันสินค้า (ถ้าไม่มี หรือ ตลอดชีพให้เลือกเป็น 0)
                                   </div>
                                 </div>
                                 </div>

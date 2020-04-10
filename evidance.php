@@ -41,7 +41,7 @@
              <li>
                  <a href="history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
-             <li>
+             <li class="active">
                  <a href="evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
              </li>
              <li>
@@ -50,7 +50,7 @@
              <li>
                  <a href="staff.php"><i class="fas fa-user-cog"></i> ข้อมูลพนักงาน</a>
              </li>
-             <li class="active">
+             <li>
                  <a href="product.php"><i class="fas fa-box"></i> ข้อมูลสินค้า</a>
              </li>
              <li>
@@ -100,31 +100,27 @@
                    </div>
                </div>
            </nav>
-<center><p><h2>ข้อมูลสินค้า</h2></p></center>
+<center><p><h2>ข้อมูลใบรับรถ</h2></p></center>
 
-<a href="manage_product/create_product.php" class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูลสินค้า </a>
+<a href="manage_evidance/create_evidance.php" class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูลใบรับรถ </a>
            <table class="table table-bordered text-center DataTable">
 
   <thead class="thead-light">
     <tr>
       <th>ลำดับ</th>
-      <th width="30%">ชื่อสินค้า</th>
-      <th width="10%">ราคาต่อหน่วย</th>
-            <th width="25%">รายละเอียดสินค้า</th>
-      <th width="10%">จำนวนอะไหล่คงเหลือ</th>
-      <th >แก้ไข</th>
-      <th >ลบ</th>
+      <th width="20%">ชื่อ</th>
+      <th width="20%">สกุล</th>
+      <th width="20%">เลขทะเบียน</th>
+      <th width="20%">วันรับรถ</th>
+      <th width="20%">พิมพ์</th>
     </tr>
   </thead>
   <tbody>
                <?php
             $search=isset($_GET['search']) ? $_GET['search']:'';
 
-            $sql = "SELECT product.p_id, product.pname, product.price, product.numproduct, product.detail, dealer.dl_nameshop, dealer.dl_phone, product.dl_insurance
-                    FROM `product`
-                    INNER JOIN dealer
-                    ON dealer.dl_id = product.dl_id
-                    WHERE pname LIKE '%$search%'";
+            $sql = "SELECT * FROM evidance INNER JOIN user ON evidance.user_id = user.user_id INNER JOIN bike_user ON bike_user.user_id = user.user_id
+                    WHERE evidance.Status=0";
             $result = $conn->query($sql);
 
             $num = 0;
@@ -136,35 +132,23 @@
               <tr>
                 <td><?php echo $num; ?></td>
 
-                <td><?php echo $row['pname']; ?></td>
-                <td><?php echo number_format($row['price']); ?> บาท</td>
-                <td><?php echo $row['detail']; ?></td>
-                <td><?php echo $row['numproduct']; ?></td>
+                <td><?php echo $row['first_name']; ?></td>
+                <td><?php echo $row['last_name']; ?></td>
+                <td><?php echo $row['bike_id']; ?></td>
+                <td><?php echo DateThaiNoTime($row['Date']); ?></td>
                 <td>
-                  <a href="manage_product/edit_product.php?id=<?php echo $row['p_id']; ?>" class="btn btn-sm btn-warning text-white ">
-                    <i class="fas fa-edit"></i> แก้ไข
+                  <a href="manage_evidance/print_ed.php?id=<?php echo $row['user_id']; ?>" class="btn btn-sm btn-primary ">
+                    <i class="fas fa-print"></i> พิมพ์
                   </a>
                 </td>
-                <td>
-                  <?php if ($row['p_id']) { ?>
-                    <a href="#" onclick="deleteItem(<?php echo $row['p_id']; ?>);" class="btn btn-sm btn-danger">
-                      <i class="fas fa-trash"></i> ลบ
-                    </a>
-                  <?php } ?>
-                </td>
+
               </tr>
             <?php } ?>
     </tbody>
   </table>
   </form>
   <!-- Script Delete -->
-  <script>
-        function deleteItem(id) {
-          if (confirm('คุณต้องการลบข้อมูลใช่หรือไม่') == true) {
-            window.location = `manage_product/delete_product.php?id=${id}`;
-          }
-        };
-      </script>
+
 
 
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->

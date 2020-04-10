@@ -93,6 +93,9 @@ if (empty($row)) {
              <li>
                  <a href="../history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
+             <li>
+                 <a href="../evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+             </li>
              <li class="active">
                  <a href="../user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>
@@ -200,7 +203,7 @@ if (empty($row)) {
                                <div class="form-group row">
                                    <label for="phone" class="col-sm-3 col-form-label">เบอร์โทรศัพท์</label>
                                    <div class="col-sm-9">
-                                       <input type="text" class="form-control" id="phone"   name="phone" value="<?php echo $row['phone']; ?>"maxlength="10" pattern="[0][0-9]{9}" required>
+                                       <input type="text" class="form-control" id="phone"   name="phone" value="<?php echo $row['phone']; ?>"maxlength="10" pattern="[0][0-9]{8,9}" required>
                                        <div class="invalid-feedback">
                                            กรุณากรอกเบอร์เบอร์โทรศัพท์
                                        </div>

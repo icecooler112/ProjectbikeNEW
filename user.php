@@ -41,20 +41,24 @@
              <li>
                  <a href="history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
+             <li>
+                 <a href="evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+             </li>
              <li class="active">
                  <a href="user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>
              <li>
                  <a href="staff.php"><i class="fas fa-user-cog"></i> ข้อมูลพนักงาน</a>
              </li>
-
              <li>
                  <a href="product.php"><i class="fas fa-box"></i> ข้อมูลสินค้า</a>
              </li>
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
-             
+             <li>
+                 <a href="show.php"><i class="fas fa-chart-line"></i> รายงานสถิติการใช้อะไหล่</a>
+             </li>
          </ul>
        </nav>
        <!-- Page Content  -->
@@ -103,16 +107,17 @@
 
              <thead class="thead-light">
                <tr>
-                 <th scope="col">ลำดับ</th>
-                 <th scope="col">ชื่อ-สกุล</th>
+                 <th width="5%">ลำดับ</th>
+                 <th width="10%">ชื่อ-สกุล</th>
                  <th scope="col">ที่อยู่</th>
                  <th scope="col">เบอร์โทรศัพท์</th>
                  <th scope="col">Email</th>
                  <th scope="col">Facebook</th>
                  <th scope="col">Line</th>
-                  <th width="10%">จัดการข้อมูลรถ</th>
-                 <th width="8%">แก้ไข</th>
-                 <th width="7%">ลบ</th>
+                 <th width="7%">ประวัติการซ่อม</th>
+                <th width="9%">จัดการข้อมูลรถ</th>
+                 <th width="9%">แก้ไข</th>
+                 <th width="8%">ลบ</th>
                </tr>
              </thead>
              <tbody>
@@ -133,6 +138,12 @@
                          <td><?php echo $row['email']; ?></td>
                          <td><?php echo $row['user_facebook']; ?></td>
                          <td><?php echo $row['user_line']; ?></td>
+                         <td>
+
+                           <a href="manage_user/history_user.php?id=<?php echo $row['user_id']; ?>" class="btn btn-sm btn-primary ">
+                            <i class="fas fa-sticky-note"></i> ประวัติ
+                           </a>
+                         </td>
                          <td>
 
                            <a href="manage_user/bike_show.php?id=<?php echo $row['user_id']; ?>" class="btn btn-sm btn-primary ">

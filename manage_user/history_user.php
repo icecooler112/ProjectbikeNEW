@@ -4,25 +4,26 @@
      */
     session_start();
     if (!$_SESSION['id']) {
-        header("Location:login.php");
+        header("Location:../login.php");
     } else {
+
 ?>
-<?php     include('connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน ?>
+<?php     include('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>การจัดการข้อมูลสินค้า</title>
+    <title>การจัดการข้อมูลลูกค้า</title>
     <!-- ติดตั้งการใช้งาน CSS ต่างๆ -->
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -36,28 +37,26 @@
 
            <ul class="list-unstyled components">
              <li>
-                 <a href="index.php"><i class="fas fa-toolbox mr-1"></i>เพิ่มข้อมูลการซ่อม</a>
+                 <a href="../index.php"><i class="fas fa-toolbox mr-1"></i>เพิ่มข้อมูลการซ่อม</a>
+             </li>
+             <li  class="active">
+                 <a href="../history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
              <li>
-                 <a href="history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
+                 <a href="../user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>
              <li>
-                 <a href="evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+                 <a href="../staff.php"><i class="fas fa-user-cog"></i> ข้อมูลพนักงาน</a>
+             </li>
+
+             <li>
+                 <a href="../product.php"><i class="fas fa-box"></i> ข้อมูลสินค้า</a>
              </li>
              <li>
-                 <a href="user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
+                 <a href="../dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
              </li>
              <li>
-                 <a href="staff.php"><i class="fas fa-user-cog"></i> ข้อมูลพนักงาน</a>
-             </li>
-             <li class="active">
-                 <a href="product.php"><i class="fas fa-box"></i> ข้อมูลสินค้า</a>
-             </li>
-             <li>
-                 <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
-             </li>
-             <li>
-                 <a href="show.php"><i class="fas fa-chart-line"></i> รายงานสถิติการใช้อะไหล่</a>
+                 <a href="../show.php"><i class="fas fa-chart-line"></i> รายงานสถิติการใช้อะไหล่</a>
              </li>
          </ul>
        </nav>
@@ -68,10 +67,11 @@
                <div class="container-fluid">
 
                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                       <ul class="nav navbar-nav ml-auto ">
+                       <ul class="nav navbar-nav ml-auto">
                            <li class="nav-item active">
                              <?php if(isset($_SESSION['id'])) { ?>
-                               <center><h5><?php echo $_SESSION["First_Name"];?> <?php echo $_SESSION["Last_Name"];?> <a class="btn btn-danger ml-2"data-toggle="modal" data-target="#LogoutModal" href="#"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></h5></center>
+                               <center><h5><?php echo $_SESSION["First_Name"];?> <?php echo $_SESSION["Last_Name"];?>  <a class="btn btn-danger ml-2"data-toggle="modal" data-target="#LogoutModal" href="#"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a></h5></center>
+
                                <div id="LogoutModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                                  <div class="modal-dialog" role="document">
                                    <div class="modal-content">
@@ -100,77 +100,60 @@
                    </div>
                </div>
            </nav>
-<center><p><h2>ข้อมูลสินค้า</h2></p></center>
+<center><p><h2>ประวัติการซ่อม</h2></p></center>
 
-<a href="manage_product/create_product.php" class="btn btn-success mb-2 float-right"><i class="fas fa-plus"></i> เพิ่มข้อมูลสินค้า </a>
            <table class="table table-bordered text-center DataTable">
 
-  <thead class="thead-light">
-    <tr>
-      <th>ลำดับ</th>
-      <th width="30%">ชื่อสินค้า</th>
-      <th width="10%">ราคาต่อหน่วย</th>
-            <th width="25%">รายละเอียดสินค้า</th>
-      <th width="10%">จำนวนอะไหล่คงเหลือ</th>
-      <th >แก้ไข</th>
-      <th >ลบ</th>
-    </tr>
-  </thead>
-  <tbody>
-               <?php
-            $search=isset($_GET['search']) ? $_GET['search']:'';
+             <thead class="thead-light">
+               <tr>
+                 <th width="5%">ลำดับ</th>
 
-            $sql = "SELECT product.p_id, product.pname, product.price, product.numproduct, product.detail, dealer.dl_nameshop, dealer.dl_phone, product.dl_insurance
-                    FROM `product`
-                    INNER JOIN dealer
-                    ON dealer.dl_id = product.dl_id
-                    WHERE pname LIKE '%$search%'";
-            $result = $conn->query($sql);
+                 <th width="50%">รายละเอียดการซ่อม</th>
+                 <th width="20%">วันและเวลา</th>
+                 <th>พิมพ์</th>
+               </tr>
+             </thead>
+             <tbody>
+             <?php
+                      $id = $_GET['id'];
+                      $sql = "SELECT * FROM history INNER JOIN user ON history.user_id = user.user_id  WHERE user.user_id= ('".$id."')";
+                      $result = $conn->query($sql);
+                      $num = 0;
 
-            $num = 0;
-            while ($row = $result->fetch_assoc()) {
+                      while ($row = $result->fetch_assoc()) {
+                        $num++;
 
-              $num++;
+                        ?>
+                       <tr>
+                         <td><?php echo $num; ?></td>
+                         <td><?php echo  $row['h_detail']; ?></td>
+                         <td><?php echo DateThai($row['datetime']); ?></td>
+                         <td>
+                           <a href="../print.php?id=<?php echo $row['h_id']; ?>" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>
+                         </td>
 
-              ?>
-              <tr>
-                <td><?php echo $num; ?></td>
+                       </tr>
+                     <?php } ?>
 
-                <td><?php echo $row['pname']; ?></td>
-                <td><?php echo number_format($row['price']); ?> บาท</td>
-                <td><?php echo $row['detail']; ?></td>
-                <td><?php echo $row['numproduct']; ?></td>
-                <td>
-                  <a href="manage_product/edit_product.php?id=<?php echo $row['p_id']; ?>" class="btn btn-sm btn-warning text-white ">
-                    <i class="fas fa-edit"></i> แก้ไข
-                  </a>
-                </td>
-                <td>
-                  <?php if ($row['p_id']) { ?>
-                    <a href="#" onclick="deleteItem(<?php echo $row['p_id']; ?>);" class="btn btn-sm btn-danger">
-                      <i class="fas fa-trash"></i> ลบ
-                    </a>
-                  <?php } ?>
-                </td>
-              </tr>
-            <?php } ?>
-    </tbody>
-  </table>
-  </form>
-  <!-- Script Delete -->
-  <script>
-        function deleteItem(id) {
-          if (confirm('คุณต้องการลบข้อมูลใช่หรือไม่') == true) {
-            window.location = `manage_product/delete_product.php?id=${id}`;
-          }
-        };
-      </script>
+
+             </tbody>
+           </table>
+
+ <center><a class="btn btn-danger text-center" href="../user.php">ย้อนกลับ</a></center>
+           <!-- Script Delete -->
+           <script>
+                 function deleteItem(id) {
+                   if (confirm('คุณต้องการลบข้อมูลใช่หรือไม่') == true) {
+                     window.location = `manage_history/delete_history.php?id=${id}`;
+                   }
+                 };
+               </script>
 
 
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script>
     $('.DataTable').DataTable({
@@ -199,7 +182,7 @@
             }
 
         });
-</script>
+    </script>
 
 </body>
 </html>

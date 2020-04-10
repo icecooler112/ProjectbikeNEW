@@ -42,6 +42,9 @@
                  <a href="history.php"><i class="fas fa-bell"></i> ประวัติการซ่อม</a>
              </li>
              <li>
+                 <a href="evidance.php"><i class="fas fa-sticky-note"></i> ข้อมูลใบรับรถ</a>
+             </li>
+             <li>
                  <a href="user.php"><i class="fas fa-users"></i> ข้อมูลลูกค้า</a>
              </li>
              <li>
@@ -53,6 +56,9 @@
              </li>
              <li>
                  <a href="dealer.php"><i class="fas fa-truck"></i> ข้อมูลผู้จำหน่ายสินค้า</a>
+             </li>
+             <li>
+                 <a href="show.php"><i class="fas fa-chart-line"></i> รายงานสถิติการใช้อะไหล่</a>
              </li>
 
          </ul>
@@ -126,7 +132,7 @@
                          <td><?php echo $num; ?></td>
                          <td value="<?php echo $row['user_id']; ?>"><?php echo $row['first_name']; ?> <?php echo $row['last_name']; ?></td>
                          <td><?php echo  $row['h_detail']; ?></td>
-                         <td><?php echo DateThai($row['datetime']); ?></td>
+                         <td><?php echo DateThaiNoTime($row['datetime']); ?></td>
 
                          <td>
                            <a href="print.php?id=<?php echo $row['h_id']; ?>" class="btn btn-primary btn-sm" role="button"><i class="fas fa-print"></i>พิมพ์</a>

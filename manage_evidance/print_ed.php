@@ -7,7 +7,7 @@
         header("Location:login.php");
     } else {
 ?>
-<?php     include('connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน ?>
+<?php     include('../connect.php'); // ดึงไฟล์เชื่อมต่อ Database เข้ามาใช้งาน ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +21,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"> -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -66,8 +66,7 @@
            </nav>
            <?php
            $id = $_GET['id'];
-           $sql = "SELECT *
-           FROM `history` INNER JOIN user ON history.user_id = user.user_id INNER JOIN staff ON staff.staff_id = user.user_id WHERE history.h_id = '$id'";
+           $sql = "SELECT * FROM evidance INNER JOIN user ON evidance.user_id = user.user_id INNER JOIN bike_user ON bike_user.user_id = user.user_id = '$id'";
            $result = $conn->query($sql);
            $history = $result->fetch_assoc();
            if (empty($history)) {
@@ -76,7 +75,7 @@
            }
 
            ?>
-           <div class="col-md-12 text-center"><h2>ใบเสร็จรับเงิน</h2></div>
+           <div class="col-md-12 text-center"><h2>ใบรับฝากซ่อมรถจักรยานยนต์</h2></div>
            <br>
            <br>
            <br>
@@ -93,15 +92,16 @@
            <table width="300">
              <tr>
                <td width="30%">เลขที่ : </td>
-               <td width="70%">SF<?php echo date("Y", strtotime($history['datetime']))?>-<?php echo sprintf("%04d", $history["h_id"]); ?></td>
+               <td width="70%">SF<?php echo date("Y", strtotime($history['Date']))?>-<?php echo sprintf("%04d", $history["ed_id"]); ?></td>
              </tr>
              <tr>
-               <td width="30%">วันที่ : </td>
-               <td width="70%"><?php echo DateThaiNoTime($history['datetime']); ?></td>
+               <td width="45%">วันที่ออกใบเสร็จ : </td>
+               <td width="70%"><?php date_default_timezone_set('asia/bangkok');
+                                 echo DateThaiNoTime(date('Y-m-d')); ?></td>
              </tr>
              <tr>
-               <td width="30%">พนักงาน : </td>
-               <td width="70%"><?php echo $history['staff_fname']; ?> <?php echo $history['staff_lname']; ?></td>
+               <td width="30%">วันรับรถ : </td>
+               <td width="70%"><?php echo DateThaiNoTime($history['Date']); ?></td>
              </tr>
            </table>
          </div>
@@ -112,10 +112,7 @@
            คุณ<?php echo $history['first_name']; ?> <?php echo $history['last_name']; ?>
            <br>
            <?php echo $history['user_address']; ?>
-           <br>
-           <br>
-           <span style="font-weight:bold;">รายละเอียดการซ่อม</span><br>
-          <?php echo $history['h_detail']; ?>
+
           <br>
           <br>
            <table class="table table-bordered">
@@ -123,74 +120,57 @@
   <thead class="thead-light text-center">
     <tr>
       <th width="5%">ลำดับ</th>
-      <th width="50%">ชื่อสินค้า</th>
-      <th width="5%">จำนวน</th>
-      <th width="20%">ราคาต่อหน่วย</th>
-      <th width="20%">ยอดรวม</th>
+      <th width="20%">เลขทะเบียนรถ</th>
+      <th width="20%">สีของรถ</th>
+      <th width="20%">ปีของรถ</th>
+      <th width="20%">ยี่ห้อของรถ</th>
     </tr>
   </thead>
   <tbody>
                <?php
-            $sql = "SELECT * FROM detail_repair AS d1 INNER JOIN product AS d2 ON (d1.p_id = d2.p_id) INNER JOIN history AS d3 ON (d1.h_id = d3.h_id) WHERE d3.h_id ='" . $_GET['id'] . "'";
+            $sql = "SELECT * FROM evidance INNER JOIN user ON evidance.user_id = user.user_id INNER JOIN bike_user ON bike_user.user_id = user.user_id WHERE user.user_id ='" . $_GET['id'] . "'";
             $result = $conn->query($sql);
             $num = 0;
-            $total = 0;
+
             while ($row = $result->fetch_assoc()) {
               $num++;
-            $total = $total + ($row['price'] * $row['num']);
+
               ?>
               <tr>
                 <td class="text-center"><?php echo $num; ?></td>
-                <td><?php echo $row['pname']; ?></td>
-                <td class="text-right"><?php echo $row['num']; ?> </td>
-                <td class="text-right"><?php echo number_format($row['price']); ?> บาท</td>
-                <td class="text-right"><?php echo number_format($row['price'] * $row['num']); ?> บาท</td>
+                <td class="text-center"><?php echo $row['bike_id']; ?></td>
+                <td class="text-center"><?php echo $row['color']; ?> </td>
+                <td class="text-center"><?php echo $row['year_bike']; ?> </td>
+                <td class="text-center"><?php echo $row['brand']; ?> </td>
               </tr>
               <?php } ?>
-              <tr>
-                <td colspan="3">
-                  <br>
-                  <br>
-                  <br>
-                  (<?php echo convertPriceBaht($total.".00"); ?>)
-                </td>
-                <td class="text-right">
-                  <div>รวมเป็นเงิน</div>
-                  <div>ภาษีมูลค่าเพิ่ม 7%</div>
-                  <div>ราคาไม่รวมภาษีมูลค่าเพิ่ม</div>
-                  <div>จำนวนเงินรวมทั้งสิ้น</div>
-                </td>
-                <td class="text-right">
-                  <div><?php echo number_format($total, 2);?> บาท</div>
-                  <div><?php echo number_format($total/7, 2);?> บาท</div>
-                  <div><?php echo number_format( $total - ($total/7) , 2);?> บาท</div>
-                  <div><?php echo number_format($total, 2);?> บาท</div>
-                </td>
-              </tr>
+
     </tbody>
   </table>
+
   <br>
   <br>
   <br>
   <br>
   <br>
   <div class="row">
-  <div class="col-md-6 text-center">
-    <div>ในนาม คุณ<?php echo $history['first_name']; ?> <?php echo $history['last_name']; ?></div>
-    <br>
-    <br>
-    <div>..............................................................</div>
-    <div>ผู้จ่ายเงิน</div>
-  </div>
+
   <div class="col-md-6 text-center">
     <div>ในนาม อ๋องมอเตอร์ ปาย</div>
     <br>
     <br>
     <div>..............................................................</div>
-    <div>ผู้รับเงิน</div>
+    <div>ผู้รับผิดชอบ</div>
   </div>
 </div>
   <?php } ?>
+  <br>
+  <br>
+  <br>
+  <br>
+  <center>
+    <h5>--- โปรดเก็บหลักฐานการรับฝากรถจักรยานยนต์ของท่าน ---</h5>
+  </center>
 
   <!-- Script Print -->
   <script type="text/javascript">
@@ -199,9 +179,9 @@
 
 
     <!-- ติดตั้งการใช้งาน Javascript ต่างๆ -->
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
